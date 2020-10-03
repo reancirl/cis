@@ -12,3 +12,10 @@
         <p>Baptismal</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ url('/church') }}" class="nav-link {{ (request()->is('church*')) ? 'active' : '' }}">
+        <i class="nav-icon fas fa-church"></i>
+        <p>Church</p>
+    </a>
+</li>

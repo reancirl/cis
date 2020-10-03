@@ -82,9 +82,8 @@
 </div>
 
 <script src="{{ mix('js/app.js') }}" defer></script>
+@include('layouts.include.scripts')
 
-@yield('third_party_scripts')
-
-@stack('page_scripts')
+@yield('scripts')
 </body>
 </html>

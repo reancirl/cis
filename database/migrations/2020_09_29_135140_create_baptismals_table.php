@@ -22,15 +22,21 @@ class CreateBaptismalsTable extends Migration
             $table->string('gender');
             $table->string('place_of_birth');
 
-            $table->string('place_of_baptism');
             $table->string('fathers_name');
             $table->string('mothers_maiden_name');
             $table->string('parents_address');
             $table->string('contact_number');
             $table->string('parents_type_of_marriage');
 
+            $table->integer('church_id')->unsigned();
             $table->date('date_of_attending_seminar');
-            $table->string('date_of_baptism');
+            $table->string('date_of_baptismal');
+
+            $table->integer('created_by')->nullable()->unsigned();
+            $table->boolean('is_deleted')->nullable();
+            $table->integer('deleted_by')->nullable()->unsigned();
+            $table->timestamp('deleted_at')->nullable();
+
             $table->timestamps();
         });
     }

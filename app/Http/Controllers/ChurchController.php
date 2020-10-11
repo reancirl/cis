@@ -27,14 +27,23 @@ class ChurchController extends Controller
         return redirect()->back()->with('success','Church successfully added');
     }
 
-    public function edit(Church $church)
-    {
-        //
+    public function edit($id)
+    {        
+        $church = Church::findOrFail($id);
+        return view('church._edit', compact('church'));
     }
 
-    public function update(Request $request, Church $church)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+        ]);
+
+        $church = Church::findOrFail($id);
+        $church->fill($request->all());
+        $church->update();
+        return redirect()->back()->with('success','Church successfully updated');
     }
 
     public function destroy($id)

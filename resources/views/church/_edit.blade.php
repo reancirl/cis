@@ -8,16 +8,18 @@
         </button>
       </div>
       <div class="modal-body">
-        
+        <form action="{{ url('church/update', $church->id) }}" method="post" id="form-update">
+          @csrf
+          @method('PATCH')
           <label>Name</label>
-          <input type="text" class="form-control" placeholder="Church Name" name="name" value="" required>
+          <input type="text" class="form-control" placeholder="Church Name" name="name" value="{{$church->name ?? ''}}" required>
           <label class="pt-2">Address</label>
-          <input type="text" class="form-control" placeholder="Church Address" name="address" value="" required>
-               
+          <input type="text" class="form-control" placeholder="Church Address" name="address" value="{{$church->address ?? ''}}" required>
+        </form>  
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" form="form-edit" class="btn btn-primary"><i class="fa fa-check"></i> Update Church</button>
+        <button type="submit" form="form-update" class="btn btn-primary"><i class="fa fa-check"></i> Update Church</button>
       </div>
     </div>
   </div>

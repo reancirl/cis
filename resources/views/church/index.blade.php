@@ -40,12 +40,12 @@
 			      			    	Actions
 			      			  	</a>
 			      			  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-			      			    	<a class="dropdown-item" href="#">Edit</a>
+			      			    	<a class="dropdown-item edit-button" href="#" data-id="{{ $c->id }}" data-url="{{ url('church/edit') }}"><i class="fa fa-edit"></i> Edit</a>
 			      			    	<form action="{{ url('church/delete', $c->id )}}" method="post" class="form-delete">
 			      			    		@csrf
 			      			    		@method('DELETE')
 			      			    	</form>
-			      			    	<button type="button" class="dropdown-item delete-button" href="#">Delete {{$c->id}}</button>
+			      			    	<button type="button" class="dropdown-item delete-button" href="#"><i class="fa fa-trash"></i> Delete</button>
 			      			  	</div>
 			      			</div>
 			      		</td>
@@ -56,14 +56,7 @@
 		  </div>
 		</div>
 	</div>
-<div class="append-lab">
-	public function history($id)
-    {
-        $laboratory = LaboratoryFee::find($id);
-        $histories = $laboratory->histories;
-        return view('fees::laboratory._history', compact('laboratory', 'histories'));
-    }
-</div>
+<div class="append-edit"></div>
 @endsection
 @section('scripts')
 	<script type="text/javascript">
@@ -76,27 +69,24 @@
 			    buttons: true,
 			    closeModal: false,
 			}).then(result => {
-	            $('.form-delete').submit();
+				if (result == true) {
+		            $('.form-delete').submit();
+		        }
 	        });
 		});
 
-		$(document).on('click', '.btn-lab', function(){
-            var div = $('.append-lab');
+		$(document).on('click', '.edit-button', function(){
+            var div = $('.append-edit');
             div.empty();
 
             var id = $(this).data('id');
             var url = $(this).data('url') + '/' + id;
-
-            var form = $('#form-update');
-            var form_url = '{{ url('admin/fees/laboratory') }}' + '/' + id;
-            form.prop('action', form_url);
-
             $.ajax({
                 url: url,
                 data: id,
                 success:function(data){
-                    div.append(data);
-                    $('#edit_fee').modal('show');
+                    div.append(data);   
+                    $('#edit_modal').modal('show');                 
                 }
             });
         });

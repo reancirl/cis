@@ -21,9 +21,8 @@
 		                    <table class="table table-bordered table-sm mb-0">
 		                        <thead class="table-secondary">
 		                            <tr>
-		                                <th class="text-center">Church</th>
-		                                <th class="text-center">Type</th>
-		                                <th class="text-center">Status</th>
+		                            	<th class="text-center">Name</th>
+		                                <th class="text-center">Church</th>		                               
 		                                <th class="text-center" width="15%">
 		                                    <i class="fa fa-filter"></i>
 		                                </th>
@@ -31,22 +30,17 @@
 		                        </thead>
 		                        <tbody>
 		                            <tr>
+		                            	<th>
+		                            		<input type="text" name="name" class="form-control" placeholder="Search .." value="{{ $request->name ?? '' }}">
+		                            	</th>
 		                                <th>
-		                                    <select class="form-control" name="student_type" id="type">
-		                                        
+		                                    <select class="form-control" name="church">
+		                                    	<option value="">-- Select --</option>
+		                                        @foreach($church as $c)
+		                                        	<option value="{{ $c->id }}">{{$c->name ?? ''}}</option>
+		                                        @endforeach
 		                                    </select>
-		                                </th>
-		                                <th>
-		                                    <select class="form-control" name="student_type" id="type">
-		                                        
-		                                    </select>
-		                                </th>
-                   
-		                                <th id="term">
-		                                    <select class="form-control" name="term" required>
-		                                        
-		                                    </select>
-		                                </th>    
+		                                </th>   
 		                                <th>
 		                                    <button type="submit" class="btn btn-primary btn-block">Filter</button>
 		                                </th>

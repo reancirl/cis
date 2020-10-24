@@ -10,10 +10,16 @@
           crossorigin="anonymous"/>
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/6/6d/Diocese_of_Iligan_Coat_of_Arms.jpg"/>
 
     @yield('third_party_stylesheets')
 
     @stack('page_css')
+    <style type="text/css">
+        hr {
+            border: 0.1px solid #000;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -30,7 +36,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <img src="https://infyom.com/images/logo/blue_logo_150x150.jpg"
+                    <img src="https://media-exp1.licdn.com/dms/image/C4E03AQHbSDSTwU2hBQ/profile-displayphoto-shrink_200_200/0?e=1605139200&v=beta&t=wzaRd3-tFvasZpxoc27QkHfUhcPqoFVMJuCSoc_eYIE"
                          class="user-image img-circle elevation-2" alt="User Image">
                     <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                 </a>

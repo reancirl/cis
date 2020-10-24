@@ -13,7 +13,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'baptismal', 'middleware' => 'auth'], function(){
 	Route::get('/', [BaptismalController::class, 'index']);	
-	Route::get('/create', [BaptismalController::class, 'create']);	
+	Route::get('/create', [BaptismalController::class, 'create']);
+	Route::post('/', [BaptismalController::class, 'store']);	
 });
 
 Route::group(['prefix' => 'church', 'middleware' => 'auth'], function(){

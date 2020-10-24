@@ -29,11 +29,12 @@ class CreateBaptismalsTable extends Migration
             $table->string('parents_type_of_marriage');
 
             $table->integer('church_id')->unsigned();
-            $table->date('date_of_attending_seminar');
+            $table->string('other_church')->nullable();
+            $table->date('date_of_seminar');
             $table->string('date_of_baptismal');
 
             $table->integer('created_by')->nullable()->unsigned();
-            $table->boolean('is_deleted')->nullable();
+            $table->boolean('is_deleted')->default(0);
             $table->integer('deleted_by')->nullable()->unsigned();
             $table->timestamp('deleted_at')->nullable();
 

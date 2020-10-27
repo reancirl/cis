@@ -235,7 +235,7 @@
 
 	    function addRow()
 	    {
-	        var tr='<tr class="sponsor_rows">'+
+	        let tr='<tr class="sponsor_rows">'+
 	        '<td><input type="text" name="sponsor_name[]" class="form-control form_data" required autocomplete="off"></td>'+
 	        '<td><select type="text" name="sponsor_gender[]" class="form-control sponsor_gender" required autocomplete="off"><option value="Godfather">Godfather</option><option value="Godmother">Godmother</option></select></td>'+
 	        '</tr>';
@@ -244,7 +244,7 @@
 
 
 	    $('#remove-btn').click(function(){
-	        var last=$('#sponsor_table tr').length;
+	        let last=$('#sponsor_table tr').length;
 	        if(last==1){
         		swal({
         		    text: 'Baptismal must have atleast 1 sponsor',
@@ -258,7 +258,7 @@
 	    });
 
 	    $('#church').on('change', function() {
-            var value = this.value;
+            let value = this.value;
             if (value == 'others') {
             	$('#other_church').show();
             }

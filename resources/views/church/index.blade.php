@@ -19,13 +19,13 @@
 	<div class="col-sm-12 grid-margin stretch-card">
 		<div class="card">
 		  <div class="card-body">
-		    <table class="table table-sm table-hover table-bordered rounded" id="church-table">
+		    <table class="table table-hover" id="church-table">
 		      <thead>
 		      	<tr>
 		      		<th>#</th>
 		      		<th>Name</th>
 		      		<th>Address</th>
-		      		<th width="10%">Action</th>
+		      		<th class="text-center">Action</th>
 		      	</tr>
 		      </thead>
 		      <tbody>
@@ -40,7 +40,7 @@
 			      			    	Actions
 			      			  	</a>
 			      			  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-			      			    	<a class="dropdown-item edit-button" href="#" data-id="{{ $c->id }}" data-url="{{ url('church/edit') }}"><i class="fa fa-edit"></i> Edit</a>
+			      			    	<a class="dropdown-item edit_button" href="#" data-id="{{ $c->id }}" data-url="{{ url('church/edit') }}"><i class="fa fa-edit"></i> Edit</a>
 			      			    	<form action="{{ url('church/delete', $c->id )}}" method="post" class="form-delete">
 			      			    		@csrf
 			      			    		@method('DELETE')
@@ -75,12 +75,12 @@
 	        });
 		});
 
-		$(document).on('click', '.edit-button', function(){
-            var div = $('.append-edit');
+		$(document).on('click', '.edit_button', function(){
+            let div = $('.append-edit');
             div.empty();
 
-            var id = $(this).data('id');
-            var url = $(this).data('url') + '/' + id;
+            let id = $(this).data('id');
+            let url = $(this).data('url') + '/' + id;
             $.ajax({
                 url: url,
                 data: id,

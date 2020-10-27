@@ -12,7 +12,7 @@
     			</h2>
     		</div>
     	</div>      
-		
+		<hr>
 		<div class="row">
 		    <div class="col-sm-12">
 		        <div class="card m-b-10">
@@ -59,55 +59,55 @@
 		</div>
 
 		@if($request->filter)
-        <div class="card">
-            <div class="card-block">
-                <table id="" class="table table-hover table-bordered nowrap table-sm">
-                    <thead>
-                        <tr>
-                            <th width="3%">#</th>
-                            <th>Name</th>
-                            <th>Gender</th>
-                            <th>Church</th>
-                            <th>Date of Baptismal</th>
-                            <th>Age</th>           
-                            <th>Action</th>                 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($baptismals as $i => $bap)
-                            <tr>
-                            	<td>{{++$i}}</td>
-                            	<td>{{$bap->full_name}}</td>
-                            	<td>{{$bap->gender}}</td>
-                            	<td>{{$bap->church->name ?? $bap->other_church}}</td>
-                            	<td>{{ $bap->birthday }}</td>
-                            	<td>{{ $bap->age ?? '' }}</td>
-                            	<td class="text-center">
-                            		<div class="dropdown show">
-                            			<a class="dropdown-toggle btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            		    	Actions
-                            		  	</a>
-                            		  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            		    	<a class="dropdown-item edit-button" href="{{ url('baptismal/edit', $bap->id) }}"><i class="fa fa-edit"></i> Edit</a>
-                            		    	<form action="{{ url('baptismal/delete', $bap->id )}}" method="post" class="form-delete">
-                            		    		@csrf
-                            		    		@method('DELETE')
-                            		    	</form>
-                            		    	<button type="button" class="dropdown-item delete_btn" href="#"><i class="fa fa-trash"></i> Delete</button>                         		    	
-                            		  	</div>
-                            		</div>
-                            	</td>
-                            </tr>
-                        @endforeach
-                    </tbody>                                                                            
-                </table>
-            </div>
-        </div>
-        <div class="row">
-        	<div class="col d-flex justify-content-center">
-            	{{ $baptismals->links() }}       		
-        	</div>
-        </div>
+	        <div class="card">
+	            <div class="card-block">
+	                <table id="" class="table table-hover">
+	                    <thead>
+	                        <tr>
+	                            <th width="3%">#</th>
+	                            <th>Name</th>
+	                            <th>Gender</th>
+	                            <th>Church</th>
+	                            <th>Date of Baptismal</th>
+	                            <th>Age</th>           
+	                            <th class="text-center">Action</th>                 
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                        @foreach ($baptismals as $i => $bap)
+	                            <tr>
+	                            	<td>{{++$i}}</td>
+	                            	<td>{{$bap->full_name ?? ''}}</td>
+	                            	<td>{{$bap->gender ?? ''}}</td>
+	                            	<td>{{$bap->church->name ?? $bap->other_church}}</td>
+	                            	<td>{{ $bap->baptismal_date ?? '' }}</td>
+	                            	<td>{{ $bap->age ?? '' }}</td>
+	                            	<td class="text-center">
+	                            		<div class="dropdown show">
+	                            			<a class="dropdown-toggle btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                            		    	Actions
+	                            		  	</a>
+	                            		  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+	                            		    	<a class="dropdown-item edit-button" href="{{ url('baptismal/edit', $bap->id) }}"><i class="fa fa-eye"></i> Show Record</a>
+	                            		    	<form action="{{ url('baptismal/delete', $bap->id )}}" method="post" class="form-delete">
+	                            		    		@csrf
+	                            		    		@method('DELETE')
+	                            		    	</form>
+	                            		    	<button type="button" class="dropdown-item delete_btn" href="#"><i class="fa fa-trash"></i> Delete</button>                         		    	
+	                            		  	</div>
+	                            		</div>
+	                            	</td>
+	                            </tr>
+	                        @endforeach
+	                    </tbody>                                                                            
+	                </table>
+	            </div>
+	        </div>
+	        <div class="row">
+	        	<div class="col d-flex justify-content-center">
+	            	{{ $baptismals->links() }}       		
+	        	</div>
+	        </div>
         @endif
     </div>
 @endsection

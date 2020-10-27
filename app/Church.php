@@ -12,4 +12,9 @@ class Church extends Model
     {
         return $this->hasOne('App\Baptismal');
     }
+
+    public function firstCommunion()
+    {
+        return $this->hasOne('App\FirstCommunion');
+    }
 }

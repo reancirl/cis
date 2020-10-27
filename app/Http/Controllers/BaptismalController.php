@@ -14,7 +14,7 @@ class BaptismalController extends Controller
     public function index(Request $request)
     {
         $churches = Church::orderBy('name')->get();
-        $baptismals = Baptismal::where('is_deleted',0);   
+        $baptismals = Baptismal::active();   
 
         if ($request->name) {
             $baptismals = search_name($request->name);
@@ -28,7 +28,7 @@ class BaptismalController extends Controller
         }
 
         $baptismals = $baptismals->orderBy('last_name')->paginate(10);
-        $baptimals = $baptismals->appends($request->except('page'));
+        $baptismals = $baptismals->appends($request->except('page'));
         return view('baptismal.index',compact('churches','baptismals','request'));
     }
     public function create()

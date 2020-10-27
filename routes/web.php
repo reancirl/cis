@@ -14,7 +14,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'baptismal', 'middleware' => 'auth'], function(){
 	Route::get('/', [BaptismalController::class, 'index']);	
 	Route::get('/create', [BaptismalController::class, 'create']);
-	Route::post('/', [BaptismalController::class, 'store']);	
+	Route::post('/', [BaptismalController::class, 'store']);
+	Route::get('/edit/{id}', [BaptismalController::class, 'edit']);
+	Route::patch('/update/{id}', [BaptismalController::class, 'update']);
+	Route::delete('/delete/{id}', [BaptismalController::class, 'destroy']);
 });
 
 Route::group(['prefix' => 'church', 'middleware' => 'auth'], function(){

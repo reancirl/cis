@@ -28,7 +28,7 @@ class CreateBaptismalsTable extends Migration
             $table->string('contact_number');
             $table->string('parents_type_of_marriage');
 
-            $table->integer('church_id')->unsigned();
+            $table->integer('church_id')->nullable()->unsigned();
             $table->string('other_church')->nullable();
             $table->date('date_of_seminar');
             $table->string('date_of_baptismal');

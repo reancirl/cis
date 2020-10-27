@@ -45,7 +45,7 @@
 			      			    		@csrf
 			      			    		@method('DELETE')
 			      			    	</form>
-			      			    	<button type="button" class="dropdown-item delete-button" href="#"><i class="fa fa-trash"></i> Delete</button>
+			      			    	<button type="button" class="dropdown-item delete_btn" href="#"><i class="fa fa-trash"></i> Delete</button>
 			      			  	</div>
 			      			</div>
 			      		</td>
@@ -60,7 +60,7 @@
 @endsection
 @section('scripts')
 	<script type="text/javascript">
-		$('.delete-button').click(function(e){
+		$('.delete_btn').click(function(e){
 			e.preventDefault();
 			swal({
 			    text: 'Are you sure you want to delete this?',

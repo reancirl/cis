@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Baptismal')
+@section('title','Add Baptismal')
 
 @section('content')
     <div class="container-fluid">  
@@ -8,12 +8,13 @@
     		<div class="col-sm-12">
     			<h2 class="pt-2"> 
     				Add Baptismal 
-    				<a class="btn btn-outline-primary btn-sm" href="{{ url('baptismal') }}"><i class="fa fa-arrow-left"></i> Go back</a>    			   		        
+    				<a class="btn btn-outline-primary btn-sm" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i> Go back</a>    			   		        
     			</h2>
     		</div>
     	</div>    
+    	<hr>
 		@include('layouts.include.alerts') 			
-		<form method="POST" action="{{ url('/baptismal') }}">
+		<form method="POST" action="{{ url('/baptismal') }}" id="form_create">
 			@csrf
 			<div>
 				<div class="row">
@@ -54,8 +55,8 @@
 				    <div class="form-group">
 				      <label for="gender">Gender</label>
 				      <select class="form-control" id="gender" name="gender">
-				        <option value="Male">Male</option>
-				        <option value="Female">Female</option>
+				        <option value="Male" {{ old('gender') == 'Male' ? 'selected' : ''}}>Male</option>
+				        <option value="Female" {{ old('gender') == 'Female' ? 'selected' : ''}}>Female</option>
 				      </select>
 				    </div>
 				  </div>  
@@ -72,14 +73,14 @@
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="date_of_birth">Date of Seminar</label>
-				      <input type="date" class="form-control" id="date_of_seminar date" name="date_of_seminar" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_birth') }}">
+				      <input type="date" class="form-control" id="date_of_seminar date" name="date_of_seminar" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_seminar') }}">
 				    </div>
 				  </div>
 
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="date_of_birth">Date of Baptismal</label>
-				      <input type="date" class="form-control" id="date_of_baptismal date" name="date_of_baptismal" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_birth') }}">
+				      <input type="date" class="form-control" id="date_of_baptismal date" name="date_of_baptismal" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_baptismal') }}">
 				    </div>
 				  </div>
 				</div>
@@ -209,7 +210,7 @@
 				  </div>
 				</div>
 
-				<button type="submit" class="btn btn-primary btn-lg btn-block mt-5">Add Record</button>
+				<button type="button" class="btn btn-primary btn-lg btn-block mt-5" id="btn_submit">Add Record</button>
 			</div>
 		</form>		
     </div>
@@ -229,6 +230,19 @@
 	        $('#sponsor_table').append(tr);
 	    };
 
+	    $('#btn_submit').on('click', function() {
+            swal({
+			    text: 'Are you sure you want to submit this data?',
+			    showCancelButton: true,
+			    icon: "warning",
+			    buttons: true,
+			    closeModal: false,
+			}).then(result => {
+				if (result == true) {
+		            $('#form_create').submit();
+		        }
+	        });
+        });
 
 	    $('#remove-btn').click(function(){
 	        var last=$('#sponsor_table tr').length;

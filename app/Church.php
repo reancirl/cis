@@ -8,6 +8,8 @@ class Church extends Model
 {
     protected $guarded = [];
 
+    public $timestamps = false;
+
     public function baptismal()
     {
         return $this->hasOne('App\Baptismal');

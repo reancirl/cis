@@ -11,7 +11,7 @@
         <form action="{{ url('first-communion') }}" method="post" id="form-create">
           @csrf
           <input type="hidden" name="baptismal_id" value="{{ $bap->id }}">
-          <label>Name</label>
+          <label>Full Name</label>
           <input type="text" class="form-control" value="{{ $bap->full_name }}" readonly>
 
           <label class="pt-3">Church</label>

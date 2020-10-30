@@ -27,7 +27,7 @@ class BaptismalController extends Controller
             }                       
         }
 
-        $baptismals = $baptismals->orderBy('last_name')->paginate(10);
+        $baptismals = $baptismals->orderByDesc('created_at')->paginate(10);
         $baptismals = $baptismals->appends($request->except('page'));
         return view('baptismal.index',compact('churches','baptismals','request'));
     }
@@ -58,7 +58,7 @@ class BaptismalController extends Controller
         $b->date_of_birth = $request->date_of_birth;
         $b->date_of_seminar = $request->date_of_seminar;
         $b->date_of_baptismal = $request->date_of_baptismal;
-        if ($request->other_church) {
+        if ($request->church_id == 'others') {
             $b->other_church = $request->other_church;
             $b->church_id = null;
         } else {
@@ -88,7 +88,7 @@ class BaptismalController extends Controller
         $facilitator->facilitator_3 = ucwords($request->facilitator_3);
         $facilitator->save();
 
-        return redirect('/baptismal')->with('success','Data succesfully added!');
+        return redirect('/baptismal/edit/'.$b->id)->with('success','Data succesfully added!');
     }
 
     public function edit(Request $request,$id)
@@ -119,7 +119,7 @@ class BaptismalController extends Controller
         $b->date_of_birth = $request->date_of_birth;
         $b->date_of_seminar = $request->date_of_seminar;
         $b->date_of_baptismal = $request->date_of_baptismal;
-        if ($request->other_church) {
+        if ($request->church_id == 'others') {
             $b->other_church = $request->other_church;
             $b->church_id = null;
         } else {

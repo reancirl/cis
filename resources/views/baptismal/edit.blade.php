@@ -101,7 +101,7 @@
 				        @foreach($church as $c)
 				        	<option value="{{$c->id}}" {{ $b->church_id == $c->id ? 'selected' : '' }}>{{$c->name ?? ''}}</option>
 				        @endforeach
-				        <option value="others">Others (Please Specify)</option>
+				        <option value="others" {{ $b->other_church ? 'selected' : '' }}>Others (Please Specify)</option>
 				      </select>
 				    </div>
 				  </div> 

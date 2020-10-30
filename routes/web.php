@@ -34,4 +34,7 @@ Route::group(['prefix' => 'first-communion', 'middleware' => 'auth'], function()
 	Route::get('/create', [FirstCommunionController::class, 'create']);
 	Route::get('/create/{id}', [FirstCommunionController::class, 'fc_create']);	
 	Route::post('/', [FirstCommunionController::class, 'store']);
+	Route::get('/edit/{id}', [FirstCommunionController::class, 'edit']);
+	Route::patch('/update/{id}', [FirstCommunionController::class, 'update']);
+	Route::delete('/delete/{id}', [FirstCommunionController::class, 'destroy']);
 });

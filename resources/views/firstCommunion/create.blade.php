@@ -57,7 +57,7 @@
 	                            		  	</a>
 	                            		  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 	                            		    	<a class="dropdown-item edit_button" href="#!" data-id="{{ $bap->id }}" data-url="{{ url('first-communion/create') }}"><i class="fa fa-plus"></i> Add Record</a>
-	                            		    	<a class="dropdown-item" href="{{ url('baptismal/edit', $bap->id) }}" target="_blank"><i class="fa fa-eye"></i> Show Full Record</a>
+	                            		    	<a class="dropdown-item show_button" href="#!" data-id="{{ $bap->id }}" data-url="{{ url('first-communion/create') }}"><i class="fa fa-eye"></i> Show Personal Data</a>
 	                            		  	</div>
 	                            		</div>
 	                            	</td>
@@ -100,6 +100,22 @@
                 success:function(data){
                     div.append(data);   
                     $('#create_modal').modal('show');                 
+                }
+            });
+        });
+
+        $('.show_button').click(function(){
+            let div = $('.append-edit');
+            div.empty();
+
+            let id = $(this).data('id');
+            let url = $(this).data('url') + '/' + id + '?show=true';
+            $.ajax({
+                url: url,
+                data: id,
+                success:function(data){
+                    div.append(data);   
+                    $('#show_modal').modal('show');                 
                 }
             });
         });

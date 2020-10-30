@@ -22,7 +22,8 @@ class ChurchController extends Controller
         ]);
 
         $church = new Church;
-        $church->fill($request->all());
+        $church->name = ucwords($request->name);
+        $church->address = ucwords($request->address);
         $church->save();
         return redirect()->back()->with('success','Church successfully added');
     }
@@ -41,7 +42,9 @@ class ChurchController extends Controller
         ]);
 
         $church = Church::findOrFail($id);
-        $church->fill($request->all());
+        // $church->fill($request->all());
+        $church->name = ucwords($request->name);
+        $church->address = ucwords($request->address);
         $church->update();
         return redirect()->back()->with('success','Church successfully updated');
     }

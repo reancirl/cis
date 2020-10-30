@@ -14,7 +14,17 @@ class FirstCommunionController extends Controller
         $churches = Church::orderBy('name')->get();
         $fc = FirstCommunion::active();
 
-        $fc = $fc->paginate(10);
+        if ($request->name) {
+            $fc = $fc->search($request->name);
+        }        
+        if ($request->church) {
+            if ($request->church == 'others') {
+                 $fc = $fc->whereNull('first_communions.church_id');
+            } else {
+                $fc = $fc->where('first_communions.church_id',$request->church); 
+            }                       
+        }
+        $fc = $fc->orderByDesc('created_at')->paginate(10);
         $fc = $fc->appends($request->except('page'));
         return view('firstCommunion.index',compact('churches','request','fc'));
     }
@@ -29,15 +39,18 @@ class FirstCommunionController extends Controller
             if ($baptismals->count() == 0) {
                 return redirect()->back()->with('error','No record found!');
             }  
-            $baptismals = $baptismals->get();
+            $baptismals = $baptismals->orderByDesc('baptismals.created_at')->get();
         }                        
         return view('firstCommunion.create',compact('request','baptismals'));
     }
 
-    public function fc_create($id)
+    public function fc_create(Request $request, $id)
     {
         $bap = Baptismal::findOrFail($id);
         $churches = Church::orderBy('name')->get();
+        if ($request->show) {
+            return view('firstCommunion._show_modal', compact('bap','churches'));
+        }
         return view('firstCommunion._create_modal', compact('bap','churches'));
     }
     public function store(Request $request)
@@ -47,40 +60,64 @@ class FirstCommunionController extends Controller
             'baptismal_id' => 'required',
         ]);
 
-        $f = new FirstCommunion;
-        if ($request->other_church) {
-            $f->other_church = $request->other_church;
-            $f->church_id = null;
+        $fc = new FirstCommunion;
+        if ($request->church_id == 'others') {
+            $fc->other_church = $request->other_church;
+            $fc->church_id = null;
         } else {
-            $f->church_id = $request->church_id;
-            $f->other_church = null;
+            $fc->church_id = $request->church_id;
+            $fc->other_church = null;
         }
-        $f->baptismal_id = $request->baptismal_id;
-        $f->date_of_communion = $request->date_of_communion;
-        $f->date_of_communion = $request->date_of_communion;
-        $f->created_by = auth()->user()->id;
-        $f->save();
+        $fc->baptismal_id = $request->baptismal_id;
+        $fc->date_of_communion = $request->date_of_communion;
+        $fc->created_by = auth()->user()->id;
+        $fc->save();
 
-        return redirect()->back()->with('success','Data successfully added!');
+        return redirect('/first-communion?filter=true')->with('success','Data succesfully added!');
     }
 
-    public function show(FirstCommunion $firstCommunion)
+    public function show()
     {
         
     }
 
-    public function edit(FirstCommunion $firstCommunion)
+    public function edit(Request $request, $id)
     {
-        //
+        $fc = FirstCommunion::findOrFail($id);
+        $churches = Church::orderBy('name')->get();        
+        return view('firstCommunion._edit', compact('fc','churches'));
     }
 
-    public function update(Request $request, FirstCommunion $firstCommunion)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'date_of_communion' => 'required',
+            'baptismal_id' => 'required',
+        ]);
+
+        $fc = FirstCommunion::findorFail($id);
+        if ($request->church_id == 'others') {
+            $fc->other_church = $request->other_church;
+            $fc->church_id = null;
+        } else {
+            $fc->church_id = $request->church_id;
+            $fc->other_church = null;
+        }
+        $fc->baptismal_id = $request->baptismal_id;
+        $fc->date_of_communion = $request->date_of_communion;
+        $fc->created_by = auth()->user()->id;
+        $fc->update();
+
+        return redirect()->back()->with('success','Data succesfully updated!');
     }
 
-    public function destroy(FirstCommunion $firstCommunion)
+    public function destroy($id)
     {
-        //
+        $data = FirstCommunion::findorFail($id);
+        $data->is_deleted = 1;
+        $data->deleted_by = auth()->user()->id;
+        $data->deleted_at = now();
+        $data->save();
+        return redirect()->back()->with('success','Record deleted successfully');
     }
 }

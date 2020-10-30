@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title','First Communion')
+@section('title','Confirmation')
 
 @section('content')
     <div class="container-fluid">  
     	<div class="row mb-3">
     		<div class="col-sm-12">
     			<h2 class="pt-2"> 
-    				Create First Communion 
+    				Create Confirmation
     				<a class="btn btn-outline-primary btn-sm" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i> Go back</a>     			   		        
     			</h2>
     		</div>
@@ -20,7 +20,7 @@
 		    	<div class="input-group-btn">
 		    	    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
 		    	    @if($request->filter)
-		    	    	<a href="{{ url('first-communion/create') }}" class="btn btn-outline-danger">Clear Filter</a>
+		    	    	<a href="{{ url('confirmation/create') }}" class="btn btn-outline-danger">Clear Filter</a>
 		    	    @endif
 		    	</div>		    
 			</div>
@@ -56,8 +56,8 @@
 	                            		    	Actions
 	                            		  	</a>
 	                            		  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-	                            		    	<a class="dropdown-item edit_button" href="#!" data-id="{{ $bap->id }}" data-url="{{ url('first-communion/create') }}"><i class="fa fa-plus"></i> Add Record</a>
-	                            		    	<a class="dropdown-item show_button" href="#!" data-id="{{ $bap->id }}" data-url="{{ url('first-communion/create') }}"><i class="fa fa-eye"></i> Show Personal Data</a>
+	                            		    	<a class="dropdown-item edit_button" href="#!"><i class="fa fa-plus"></i> Add Record</a>
+	                            		    	
 	                            		  	</div>
 	                            		</div>
 	                            	</td>
@@ -68,11 +68,26 @@
 	            </div>
 	        </div>
         @endif
+
     </div>
    	<div class="append-edit"></div>
 @endsection
 @section('scripts')
 	<script type="text/javascript">
+		$('.delete_btn').click(function(e){
+			e.preventDefault();
+			swal({
+			    text: 'Are you sure you want to delete this?',
+			    showCancelButton: true,
+			    icon: "warning",
+			    buttons: true,
+			    closeModal: false,
+			}).then(result => {
+				if (result == true) {
+		            $('.form-delete').submit();
+		        }
+	        });
+		});
 
 		$('.edit_button').click(function(){
             let div = $('.append-edit');

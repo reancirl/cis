@@ -19,6 +19,12 @@ class Baptismal extends Model
               ->select('f.*','baptismals.*');
     } 
 
+    public function scopeConfirmations($query){
+        $query->leftjoin('confirmations as f', 'f.baptismal_id', 'baptismals.id')
+              ->whereNull('f.baptismal_id')
+              ->select('f.*','baptismals.*');
+    } 
+
 	public function church()
     {
         return $this->belongsTo('App\Church', 'church_id');

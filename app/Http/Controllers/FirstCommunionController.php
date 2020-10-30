@@ -39,7 +39,7 @@ class FirstCommunionController extends Controller
             if ($baptismals->count() == 0) {
                 return redirect()->back()->with('error','No record found!');
             }  
-            $baptismals = $baptismals->orderByDesc('baptismals.created_at')->get();
+            $baptismals = $baptismals->orderByDesc('baptismals.last_name')->get();
         }                        
         return view('firstCommunion.create',compact('request','baptismals'));
     }
@@ -74,11 +74,6 @@ class FirstCommunionController extends Controller
         $fc->save();
 
         return redirect('/first-communion?filter=true')->with('success','Data succesfully added!');
-    }
-
-    public function show()
-    {
-        
     }
 
     public function edit(Request $request, $id)

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChurchController;
 use App\Http\Controllers\BaptismalController;
 use App\Http\Controllers\FirstCommunionController;
+use App\Http\Controllers\ConfirmationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,4 +38,9 @@ Route::group(['prefix' => 'first-communion', 'middleware' => 'auth'], function()
 	Route::get('/edit/{id}', [FirstCommunionController::class, 'edit']);
 	Route::patch('/update/{id}', [FirstCommunionController::class, 'update']);
 	Route::delete('/delete/{id}', [FirstCommunionController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'confirmation', 'middleware' => 'auth'], function(){
+	Route::get('/', [ConfirmationController::class, 'index']);
+	Route::get('/create', [ConfirmationController::class, 'create']);
 });

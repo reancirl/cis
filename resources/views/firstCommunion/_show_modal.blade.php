@@ -19,6 +19,12 @@
 
           <label class="pt-3">Place of Birth</label>
           <input type="text" class="form-control" value="{{ $bap->place_of_birth }}" readonly>
+
+          <label class="pt-3">Mother's Maiden Name</label>
+          <input type="text" class="form-control" value="{{ $bap->mothers_maiden_name }}" readonly>
+
+          <label class="pt-3">Father's Name</label>
+          <input type="text" class="form-control" value="{{ $bap->fathers_name }}" readonly>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

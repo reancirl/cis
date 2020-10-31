@@ -49,7 +49,7 @@
 </li>
 
 <li class="nav-item">
-    <a href="{{ url('/marriage') }}" class="nav-link {{ (request()->is('marriage*')) ? 'active' : '' }}">
+    <a href="{{ url('/import-records') }}" class="nav-link {{ (request()->is('import-records*')) ? 'active' : '' }}">
         <i class="nav-icon fas fa-file-import"></i>
         <p>Import Records</p>
     </a>

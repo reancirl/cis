@@ -19,7 +19,7 @@
 	<div class="col-sm-12 grid-margin stretch-card">
 		<div class="card">
 		  <div class="card-body">
-		    <table class="table table-hover" id="church-table">
+		    <table class="table table-hover table-responsive-sm" id="church-table">
 		      <thead>
 		      	<tr>
 		      		<th>#</th>

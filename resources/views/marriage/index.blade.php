@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title','Baptismal')
+@section('title','Marriage')
 
 @section('content')
     <div class="container-fluid">  
     	<div class="row mb-3">
     		<div class="col-sm-12">
     			<h2 class="pt-2"> 
-    				Baptismal 
-    				<a class="btn btn-outline-primary btn-sm" href="{{ url('baptismal/create') }}"><i class="fa fa-plus"></i> Add Baptismal</a>    			   		        
+    				Marriage 
+    				<a class="btn btn-outline-primary btn-sm" href="{{ url('marriage/create') }}"><i class="fa fa-plus"></i> Add Marriage</a>    			   		        
     			</h2>
     		</div>
     	</div>      
@@ -58,57 +58,6 @@
 		    </div>
 		</div>
 
-		@if($request->filter)
-	        <div class="card">
-	            <div class="card-block">
-	                <table id="" class="table table-hover table-responsive-sm">
-	                    <thead>
-	                        <tr>
-	                            <th width="3%">#</th>
-	                            <th>Name</th>
-	                            <th>Gender</th>
-	                            <th>Church</th>
-	                            <th>Date of Baptismal</th>
-	                            <th>Age</th>           
-	                            <th class="text-center">Action</th>                 
-	                        </tr>
-	                    </thead>
-	                    <tbody>
-	                        @foreach ($baptismals as $i => $bap)
-	                            <tr>
-	                            	<td>{{++$i}}</td>
-	                            	<td>{{$bap->full_name ?? ''}}</td>
-	                            	<td>{{$bap->gender ?? ''}}</td>
-	                            	<td>{{$bap->church->name ?? $bap->other_church}}</td>
-	                            	<td>{{ $bap->baptismal_date ?? '' }}</td>
-	                            	<td>{{ $bap->age ?? '' }}</td>
-	                            	<td class="text-center">
-	                            		<div class="dropdown show">
-	                            			<a class="dropdown-toggle btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                            		    	Actions
-	                            		  	</a>
-	                            		  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-	                            		    	<a class="dropdown-item edit-button" href="{{ url('baptismal/edit', $bap->id) }}"><i class="fa fa-eye"></i> Show Record</a>
-	                            		    	<form action="{{ url('baptismal/delete', $bap->id )}}" method="post" class="form-delete">
-	                            		    		@csrf
-	                            		    		@method('DELETE')
-	                            		    		<button type="submit" class="dropdown-item delete_btn" href="#"><i class="fa fa-trash"></i> Delete</button>                         		    	
-	                            		    	</form>
-	                            		  	</div>
-	                            		</div>
-	                            	</td>
-	                            </tr>
-	                        @endforeach
-	                    </tbody>                                                                            
-	                </table>
-	            </div>
-	        </div>
-	        <div class="row">
-	        	<div class="col d-flex justify-content-center">
-	            	{{ $baptismals->links() }}       		
-	        	</div>
-	        </div>
-        @endif
     </div>
 @endsection
 @section('scripts')

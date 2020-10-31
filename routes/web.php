@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChurchController;
+use App\Http\Controllers\MarriageController;
 use App\Http\Controllers\BaptismalController;
-use App\Http\Controllers\FirstCommunionController;
 use App\Http\Controllers\ConfirmationController;
+use App\Http\Controllers\FirstCommunionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,4 +49,9 @@ Route::group(['prefix' => 'confirmation', 'middleware' => 'auth'], function(){
 	Route::get('/edit/{id}', [ConfirmationController::class, 'edit']);
 	Route::patch('/update/{id}', [ConfirmationController::class, 'update']);
 	Route::delete('/delete/{id}', [ConfirmationController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'marriage', 'middleware' => 'auth'], function(){
+	Route::get('/', [MarriageController::class, 'index']);
+	Route::get('/create', [MarriageController::class, 'create']);
 });

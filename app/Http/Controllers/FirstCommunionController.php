@@ -12,21 +12,21 @@ class FirstCommunionController extends Controller
     public function index(Request $request)
     {
         $churches = Church::orderBy('name')->get();
-        $fc = FirstCommunion::active();
+        $communions = FirstCommunion::active();
 
         if ($request->name) {
-            $fc = $fc->search($request->name);
+            $communions = $communions->search($request->name);
         }        
         if ($request->church) {
             if ($request->church == 'others') {
-                 $fc = $fc->whereNull('first_communions.church_id');
+                 $communions = $communions->whereNull('first_communions.church_id');
             } else {
-                $fc = $fc->where('first_communions.church_id',$request->church); 
+                $communions = $communions->where('first_communions.church_id',$request->church); 
             }                       
         }
-        $fc = $fc->orderByDesc('created_at')->paginate(10);
-        $fc = $fc->appends($request->except('page'));
-        return view('firstCommunion.index',compact('churches','request','fc'));
+        $communions = $communions->orderByDesc('first_communions.created_at')->paginate(10);
+        $communions = $communions->appends($request->except('page'));
+        return view('firstCommunion.index',compact('churches','request','communions'));
     }
 
     public function create(Request $request)
@@ -60,7 +60,10 @@ class FirstCommunionController extends Controller
             'baptismal_id' => 'required',
         ]);
 
-        $fc = new FirstCommunion;
+        $fc = FirstCommunion::find($request->baptismal_id);
+        if (!$fc) {
+            $fc = new FirstCommunion;
+        }        
         if ($request->church_id == 'others') {
             $fc->other_church = $request->other_church;
             $fc->church_id = null;
@@ -71,6 +74,9 @@ class FirstCommunionController extends Controller
         $fc->baptismal_id = $request->baptismal_id;
         $fc->date_of_communion = $request->date_of_communion;
         $fc->created_by = auth()->user()->id;
+        $fc->is_deleted = false;
+        $fc->deleted_by = null;
+        $fc->deleted_at = null;
         $fc->save();
 
         return redirect('/first-communion?filter=true')->with('success','Data succesfully added!');

@@ -43,4 +43,9 @@ Route::group(['prefix' => 'first-communion', 'middleware' => 'auth'], function()
 Route::group(['prefix' => 'confirmation', 'middleware' => 'auth'], function(){
 	Route::get('/', [ConfirmationController::class, 'index']);
 	Route::get('/create', [ConfirmationController::class, 'create']);
+	Route::get('/create/{id}', [ConfirmationController::class, 'c_create']);
+	Route::post('/', [ConfirmationController::class, 'store']);
+	Route::get('/edit/{id}', [ConfirmationController::class, 'edit']);
+	Route::patch('/update/{id}', [ConfirmationController::class, 'update']);
+	Route::delete('/delete/{id}', [ConfirmationController::class, 'destroy']);
 });

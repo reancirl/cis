@@ -189,8 +189,8 @@
 						<tfoot style="display:none" id="tfoot">
 							<tr>
 								<td colspan="3" class="text-center">
-									<button type="button" class="btn btn-success" id="add-btn"><i class="fa fa-plus"></i> Add Row</button>
-									<button type="button" class="btn btn-outline-danger" id="remove-btn"><i class="fa fa-trash"></i> Remove Row</button>
+									<button type="button" class="btn btn-sm btn-success" id="add-btn"><i class="fa fa-plus"></i> Add Row</button>
+									<button type="button" class="btn btn-sm btn-outline-danger" id="remove-btn"><i class="fa fa-trash"></i> Remove Row</button>
 								</td>
 							</tr>				      					      	
 						</tfoot>

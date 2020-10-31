@@ -16,12 +16,14 @@ class Baptismal extends Model
     public function scopeCommunions($query){
         $query->leftjoin('first_communions as f', 'f.baptismal_id', 'baptismals.id')
               ->whereNull('f.baptismal_id')
+              ->orWhere('f.is_deleted',1)
               ->select('f.*','baptismals.*');
     } 
 
     public function scopeConfirmations($query){
         $query->leftjoin('confirmations as f', 'f.baptismal_id', 'baptismals.id')
               ->whereNull('f.baptismal_id')
+              ->orWhere('f.is_deleted',1)
               ->select('f.*','baptismals.*');
     } 
 

@@ -56,8 +56,8 @@
 	                            		    	Actions
 	                            		  	</a>
 	                            		  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-	                            		    	<a class="dropdown-item edit_button" href="#!"><i class="fa fa-plus"></i> Add Record</a>
-	                            		    	
+	                            		    	<a class="dropdown-item edit_button" href="{{ url('confirmation/create',$bap->id) }}"><i class="fa fa-plus"></i> Add Record</a>
+	                            		    	<a class="dropdown-item show_button" href="#!" data-id="{{ $bap->id }}" data-url="{{ url('first-communion/create') }}"><i class="fa fa-eye"></i> Show Personal Data</a>
 	                            		  	</div>
 	                            		</div>
 	                            	</td>
@@ -74,37 +74,6 @@
 @endsection
 @section('scripts')
 	<script type="text/javascript">
-		$('.delete_btn').click(function(e){
-			e.preventDefault();
-			swal({
-			    text: 'Are you sure you want to delete this?',
-			    showCancelButton: true,
-			    icon: "warning",
-			    buttons: true,
-			    closeModal: false,
-			}).then(result => {
-				if (result == true) {
-		            $('.form-delete').submit();
-		        }
-	        });
-		});
-
-		$('.edit_button').click(function(){
-            let div = $('.append-edit');
-            div.empty();
-
-            let id = $(this).data('id');
-            let url = $(this).data('url') + '/' + id;
-            $.ajax({
-                url: url,
-                data: id,
-                success:function(data){
-                    div.append(data);   
-                    $('#create_modal').modal('show');                 
-                }
-            });
-        });
-
         $('.show_button').click(function(){
             let div = $('.append-edit');
             div.empty();

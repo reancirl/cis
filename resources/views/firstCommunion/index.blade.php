@@ -58,53 +58,58 @@
 		    </div>
 		</div>
 
-			@if($request->filter)
-		        <div class="card">
-		            <div class="card-block">
-		                <table id="" class="table table-hover">
-		                    <thead>
-		                        <tr>
-		                            <th width="3%">#</th>
-		                            <th>Name</th>
-		                            <th>Gender</th>
-		                            <th>Church</th>
-		                            <th>Date of First Communion</th>
-		                            <th>Age</th>           
-		                            <th class="text-center">Action</th>                 
-		                        </tr>
-		                    </thead>
-		                    <tbody>
-		                        @foreach ($fc as $i => $fc)
-		                            <tr>
-		                            	<td>{{++$i}}</td>
-		                            	<td>{{ $fc->baptismal->full_name ?? '' }}</td>
-		                            	<td>{{ $fc->baptismal->gender ?? '' }}</td>
-		                            	<td>{{ $fc->church->name ?? $fc->other_church }}</td>
-		                            	<td>{{ $fc->communion_date ?? '' }}</td>
-		                            	<td>{{ $fc->baptismal->age ?? '' }}</td>
-		                            	<td class="text-center">
-		                            		<div class="dropdown show">
-		                            			<a class="dropdown-toggle btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		                            		    	Actions
-		                            		  	</a>
-		                            		  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-		                            		    	<a class="dropdown-item edit_btn" href="#!" data-id="{{ $fc->id }}" data-url="{{ url('first-communion/edit') }}"><i class="fa fa-edit"></i> Edit Record</a>
-		                            		    	<form action="{{ url('first-communion/delete', $fc->id )}}" method="post" class="form-delete">
-		                            		    		@csrf
-		                            		    		@method('DELETE')
-		                            		    	</form>
-		                            		    	<button type="button" class="dropdown-item delete_btn" href="#"><i class="fa fa-trash"></i> Delete</button> 
-		                            		  	</div>
-		                            		</div>
-		                            	</td>
-		                            </tr>
-		                        @endforeach
-		                    </tbody>                                                                            
-		                </table>
-		            </div>
-		        </div>		        
-	        @endif
-    	</div>
+		@if($request->filter)
+	        <div class="card">
+	            <div class="card-block">
+	                <table id="" class="table table-hover">
+	                    <thead>
+	                        <tr>
+	                            <th width="3%">#</th>
+	                            <th>Name</th>
+	                            <th>Gender</th>
+	                            <th>Church</th>
+	                            <th>Date of First Communion</th>
+	                            <th>Age</th>           
+	                            <th class="text-center">Action</th>                 
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                        @foreach ($communions as $i => $fc)
+	                            <tr>
+	                            	<td>{{++$i}}</td>
+	                            	<td>{{ $fc->baptismal->full_name ?? '' }}</td>
+	                            	<td>{{ $fc->baptismal->gender ?? '' }}</td>
+	                            	<td>{{ $fc->church->name ?? $fc->other_church }}</td>
+	                            	<td>{{ $fc->communion_date ?? '' }}</td>
+	                            	<td>{{ $fc->baptismal->age ?? '' }}</td>
+	                            	<td class="text-center">
+	                            		<div class="dropdown show">
+	                            			<a class="dropdown-toggle btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                            		    	Actions
+	                            		  	</a>
+	                            		  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+	                            		    	<a class="dropdown-item edit_btn" href="#!" data-id="{{ $fc->id }}" data-url="{{ url('first-communion/edit') }}"><i class="fa fa-edit"></i> Edit Record</a>
+	                            		    	<form action="{{ url('first-communion/delete', $fc->id )}}" method="post" class="form-delete">
+	                            		    		@csrf
+	                            		    		@method('DELETE')
+	                            		    		<button type="submit" class="dropdown-item delete_btn"><i class="fa fa-trash"></i> Delete</button> 
+	                            		    	</form>
+	                            		  	</div>
+	                            		</div>
+	                            	</td>
+	                            </tr>
+	                        @endforeach
+	                    </tbody>                                                                            
+	                </table>
+	            </div>
+	        </div>	
+	        <div class="row">
+	        	<div class="col d-flex justify-content-center">
+	            	{{ $communions->links() }}       		
+	        	</div>
+	        </div>	        
+        @endif
+    </div>
     <div class="append-div"></div>
 @endsection
 @section('scripts')
@@ -125,7 +130,7 @@
             });
         });
 
-        $('.delete_btn').click(function(e){
+        $('.form-delete').submit(function(e){
 			e.preventDefault();
 			swal({
 			    text: 'Are you sure you want to delete this?',
@@ -135,7 +140,7 @@
 			    closeModal: false,
 			}).then(result => {
 				if (result == true) {
-		            $('.form-delete').submit();
+		            $(this).submit();
 		        }
 	        });
 		});

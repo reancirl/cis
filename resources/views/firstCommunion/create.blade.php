@@ -56,7 +56,7 @@
 	                            		    	Actions
 	                            		  	</a>
 	                            		  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-	                            		    	<a class="dropdown-item edit_button" href="#!" data-id="{{ $bap->id }}" data-url="{{ url('first-communion/create') }}"><i class="fa fa-plus"></i> Add Record</a>
+	                            		    	<a class="dropdown-item add_button" href="#!" data-id="{{ $bap->id }}" data-url="{{ url('first-communion/create') }}"><i class="fa fa-plus"></i> Add Record</a>
 	                            		    	<a class="dropdown-item show_button" href="#!" data-id="{{ $bap->id }}" data-url="{{ url('first-communion/create') }}"><i class="fa fa-eye"></i> Show Personal Data</a>
 	                            		  	</div>
 	                            		</div>
@@ -74,7 +74,7 @@
 @section('scripts')
 	<script type="text/javascript">
 
-		$('.edit_button').click(function(){
+		$('.add_button').click(function(){
             let div = $('.append-edit');
             div.empty();
 

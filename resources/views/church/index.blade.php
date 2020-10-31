@@ -44,8 +44,8 @@
 			      			    	<form action="{{ url('church/delete', $c->id )}}" method="post" class="form-delete">
 			      			    		@csrf
 			      			    		@method('DELETE')
+			      			    		<button type="submit" class="dropdown-item delete_btn"><i class="fa fa-trash"></i> Delete</button>
 			      			    	</form>
-			      			    	<button type="button" class="dropdown-item delete_btn" href="#"><i class="fa fa-trash"></i> Delete</button>
 			      			  	</div>
 			      			</div>
 			      		</td>
@@ -60,7 +60,7 @@
 @endsection
 @section('scripts')
 	<script type="text/javascript">
-		$('.delete_btn').click(function(e){
+		$('.form-delete').submit(function(e){
 			e.preventDefault();
 			swal({
 			    text: 'Are you sure you want to delete this?',
@@ -70,7 +70,7 @@
 			    closeModal: false,
 			}).then(result => {
 				if (result == true) {
-		            $('.form-delete').submit();
+		            $(this).submit();
 		        }
 	        });
 		});

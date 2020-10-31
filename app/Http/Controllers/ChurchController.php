@@ -10,7 +10,7 @@ class ChurchController extends Controller
 
     public function index()
     {
-        $church = Church::all();
+        $church = Church::where('is_deleted',0)->get();
         return view('church.index',compact('church'));
     }
 
@@ -52,7 +52,10 @@ class ChurchController extends Controller
     public function destroy($id)
     {
         $data = Church::findOrFail($id);
-        $data->delete();
+        $data->is_deleted = 1;
+        $data->deleted_by = auth()->user()->id;
+        $data->deleted_at = now();
+        $data->save();
         return redirect()->back()->with('success','Church deleted successfully');
     }
 }

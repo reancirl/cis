@@ -29,7 +29,7 @@
           </div>
 
           <label class="pt-3">Date of First Communion:</label>
-          <input type="date" class="form-control" id="date" name="date_of_communion" placeholder="dd/mm/yyyy">
+          <input type="date" class="form-control" id="date" name="date_of_communion" placeholder="dd/mm/yyyy" required>
 
         </form> 
       </div>

@@ -82,7 +82,7 @@
         <div class="float-right d-none d-sm-block">
             <b>CIS v.2</b>
         </div>
-        <strong>Copyright &copy; 2020 <a href="https://reancirl.life" target="_blank">GASA Developers</a>.</strong> All rights
+        <strong>Copyright &copy; 2020 <a href="https://reancirl.life" target="_blank">Reancirl Balaba</a>.</strong> All rights
         reserved.
     </footer>
 </div>

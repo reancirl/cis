@@ -67,7 +67,7 @@
           $('#form-wife-search .badge-success').show();
         }
 
-        if($('#couple_table tbody tr').length > 1) {
+        if($('#couple_table tbody tr').length == 2) {
           $('#couple_data button').show();
         } else { 
           $('#couple_data button').hide();

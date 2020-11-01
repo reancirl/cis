@@ -19,6 +19,10 @@ class MarriageController extends Controller
 
     public function create(Request $request)
     {
+        if ($request->husband_filter) {
+            $baptismal = Baptismal::active();
+            $baptismal = $baptismal->husband();
+        }
         return view('marriage.create',compact('request'));
     }
 

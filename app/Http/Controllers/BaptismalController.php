@@ -88,7 +88,7 @@ class BaptismalController extends Controller
         $facilitator->facilitator_3 = ucwords($request->facilitator_3);
         $facilitator->save();
 
-        return redirect('/baptismal/edit/'.$b->id)->with('success','Data succesfully added!');
+        return redirect('/baptismal?filter=true')->with('success','Data succesfully added!');
     }
 
     public function edit(Request $request,$id)

@@ -19,7 +19,7 @@
 
 				<div class="col-sm-5">
 					<div class="input-group">
-				    	<input type="text" class="form-control" name="husband_name" placeholder="Search Parishioner..." value="{{ $request->husband_name ?? '' }}" required>
+				    	<input type="text" class="form-control" name="husband_name" placeholder="Search Husband Record..." value="{{ $request->husband_name ?? '' }}">
 				    	<div class="input-group-btn">
 				    	    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
 				    	    @if($request->husband_name)
@@ -31,7 +31,7 @@
 				<div class="col-sm-2"></div>
 				<div class="col-sm-5">
 					<div class="input-group">
-				    	<input type="text" class="form-control" name="husband_name" placeholder="Search Parishioner..." value="{{ $request->husband_name ?? '' }}" required>
+				    	<input type="text" class="form-control" name="wife_name" placeholder="Search Wife Record..." value="{{ $request->wife_name ?? '' }}">
 				    	<div class="input-group-btn">
 				    	    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
 				    	    @if($request->husband_name)

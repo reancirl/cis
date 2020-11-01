@@ -72,14 +72,23 @@
 				<div class="row">	
 				  <div class="col">
 				    <div class="form-group">
-				      <label for="date_of_birth">Date of Confirmation</label>
-				      <input type="date" class="form-control" name="date_of_confirmation" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_confirmation') }}">
+				      <label for="date_of_birth">Date of Seminar</label>
+				      <input type="date" class="form-control" name="date_of_seminar" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_seminar') }}">
 				    </div>
 				  </div>
 
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="date_of_birth">Date of Confirmation</label>
+				      <input type="date" class="form-control" name="date_of_confirmation" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_confirmation') }}">
+				    </div>
+				  </div>				  
+				</div>
+
+				<div class="row">
 				  <div class="col-sm-6">
 				    <div class="form-group">
-				      <label for="gender">Church of Baptism</label>
+				      <label for="gender">Church of Confirmation</label>
 				      <select class="form-control" name="church_id" required id="church">
 				        <option value="">-- Select --</option>
 				        @foreach($church as $c)

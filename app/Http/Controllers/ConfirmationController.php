@@ -73,6 +73,7 @@ class ConfirmationController extends Controller
         }
         $c->baptismal_id = $request->baptismal_id;
         $c->date_of_confirmation = $request->date_of_confirmation;
+        $c->date_of_seminar = $request->date_of_seminar;
         $c->created_by = auth()->user()->id;
         $c->is_deleted = false;
         $c->deleted_by = null;
@@ -119,6 +120,7 @@ class ConfirmationController extends Controller
             $c->other_church = null;
         }
         $c->date_of_confirmation = $request->date_of_confirmation;
+        $c->date_of_seminar = $request->date_of_seminar;
         $c->created_by = auth()->user()->id;
         $c->is_deleted = false;
         $c->deleted_by = null;

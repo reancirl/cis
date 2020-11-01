@@ -18,6 +18,7 @@ class CreateConfirmationsTable extends Migration
             $table->integer('church_id')->nullable()->unsigned();
             $table->string('other_church')->nullable();
             $table->UnsignedBiginteger('baptismal_id');
+            $table->date('date_of_seminar')->nullable();
             $table->date('date_of_confirmation');
 
             $table->integer('created_by')->nullable()->unsigned();

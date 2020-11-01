@@ -82,7 +82,15 @@
 				      <input type="date" class="form-control" name="date_of_confirmation" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ $c->date_of_confirmation }}">
 				    </div>
 				  </div>
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="date_of_birth">Date of Seminar</label>
+				      <input type="date" class="form-control" name="date_of_seminar" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ $c->date_of_seminar }}">
+				    </div>
+				  </div>
+				</div>
 
+				<div class="row">
 				  <div class="col-sm-6">
 				    <div class="form-group">
 				      <label for="church">Church of Baptism</label>

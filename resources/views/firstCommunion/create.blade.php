@@ -29,7 +29,7 @@
 		@if($request->filter)
 	        <div class="card mt-4">
 	            <div class="card-block">
-	                <table id="" class="table table-hover">
+	                <table id="" class="table table-hover table-responsive-sm">
 	                    <thead>
 	                        <tr>
 	                            <th width="5%">#</th>

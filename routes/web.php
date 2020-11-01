@@ -54,4 +54,5 @@ Route::group(['prefix' => 'confirmation', 'middleware' => 'auth'], function(){
 Route::group(['prefix' => 'marriage', 'middleware' => 'auth'], function(){
 	Route::get('/', [MarriageController::class, 'index']);
 	Route::get('/create', [MarriageController::class, 'create']);
+	Route::get('/show/{id}', [MarriageController::class, 'show']);
 });

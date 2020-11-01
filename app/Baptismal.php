@@ -27,6 +27,24 @@ class Baptismal extends Model
               ->select('f.*','baptismals.*');
     } 
 
+    public function scopeHusband($query){
+        $query->leftjoin('confirmations as f', 'f.baptismal_id', 'baptismals.id')
+              ->leftjoin('marriages as m', 'm.husband_id', 'baptismals.id')
+              ->whereNotNull('f.baptismal_id')
+              ->whereNull('m.husband_id')
+              ->where('baptismals.gender','Male')
+              ->select('baptismals.*','f.*','m.*');;
+    }
+
+    public function scopeWife($query){
+        $query->leftjoin('confirmations as f', 'f.baptismal_id', 'baptismals.id')
+              ->leftjoin('marriages as m', 'm.wife_id', 'baptismals.id')
+              ->whereNotNull('f.baptismal_id')
+              ->whereNull('m.wife_id')
+              ->where('baptismals.gender','Female')
+              ->select('baptismals.*','f.*','m.*');
+    } 
+
 	public function church()
     {
         return $this->belongsTo('App\Church', 'church_id');

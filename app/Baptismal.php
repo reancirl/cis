@@ -43,14 +43,23 @@ class Baptismal extends Model
               ->whereNull('m.wife_id')
               ->where('baptismals.gender','Female')
               ->select('baptismals.*','f.*','m.*');
+    }
+
+    public function scopeValidity($query){
+        $query->leftjoin('confirmations as f', 'f.baptismal_id', 'baptismals.id')
+              ->leftjoin('marriages as m', 'm.wife_id', 'baptismals.id')
+              ->whereNotNull('f.baptismal_id')
+              ->whereNull('m.wife_id')  
+              ->whereNull('m.husband_id')              
+              ->select('baptismals.*','f.*','m.*');
     } 
 
-	public function church()
+	  public function church()
     {
         return $this->belongsTo('App\Church', 'church_id');
     }
 
-	public function baptismalSponsors()
+	  public function baptismalSponsors()
     {
         return $this->hasMany('App\BaptismalSponsor', 'baptismal_id','id');
     }
@@ -80,5 +89,13 @@ class Baptismal extends Model
     public function getAgeAttribute()
     {
         return Carbon::parse($this->attributes['date_of_birth'])->age;
+    }
+
+    public function getStatusAttribute(){
+        if (Carbon::now() >= $this->enrolment_start_date && Carbon::now() <= $this->enrolment_end_date) 
+        {
+            return 'on-going';
+        }
+        return 'expired';
     }
 }

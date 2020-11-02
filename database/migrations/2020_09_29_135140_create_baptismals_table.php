@@ -27,6 +27,7 @@ class CreateBaptismalsTable extends Migration
             $table->string('parents_address');
             $table->string('contact_number');
             $table->string('parents_type_of_marriage');
+            $table->string('parents_marriage_place');
 
             $table->integer('church_id')->nullable()->unsigned();
             $table->string('other_church')->nullable();

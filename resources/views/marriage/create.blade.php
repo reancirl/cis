@@ -1,34 +1,36 @@
 @extends('layouts.app')
 
-@section('title','Add Baptismal')
+@section('title','Add Marriage')
 
 @section('content')
     <div class="container-fluid">  
     	<div class="row mb-3">
     		<div class="col-sm-12">
     			<h2 class="pt-2"> 
-    				Add Baptismal 
+    				Add Marriage 
     				<a class="btn btn-outline-primary btn-sm" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i> Go back</a>    			   		        
     			</h2>
     		</div>
     	</div>    
     	<hr>
 		@include('layouts.include.alerts') 			
-		<form method="POST" action="{{ url('/baptismal') }}" id="form_create">
+		<form method="POST" action="" id="form_create">
 			@csrf
 			<div>
+				<input type="hidden" name="husband_id" value="{{ $h->id }}">
+				<input type="hidden" name="wife_id" value="{{ $w->id }}">
 				<div class="row">
 				  <div class="col">
 				    <div class="form-group">
-				      <label for="first_name">First Name</label>
-				        <input type="text" class="form-control" id="first_name" name="first_name" required autocomplete="off" value="{{ old('first_name') }}">
+				      <label for="first_name">Husband Name</label>
+				        <input type="text" class="form-control" value="{{ $h->full_name }}" readonly>
 				    </div>
 				  </div>
 
 				  <div class="col">
 				    <div class="form-group">
-				      <label for="last_name">Last Name</label>
-				      <input type="text" class="form-control" id="last_name" name="last_name" required autocomplete="off" value="{{ old('last_name') }}">
+				      <label for="first_name">Wife Name</label>
+				        <input type="text" class="form-control" value="{{ $w->full_name }}" readonly>
 				    </div>
 				  </div>
 				</div>
@@ -37,58 +39,151 @@
 				<div class="row">
 				  <div class="col">
 				    <div class="form-group">
-				      <label for="middle_name">Middle Name</label>
-				      <input type="text" class="form-control" id="middle_name" name="middle_name" required autocomplete="off" value="{{ old('middle_name') }}">
+				      <label for="middle_name">Husband Date of Birth</label>
+				      <input type="text" class="form-control" value="{{ $h->birthday }}" readonly>
 				    </div>
 				  </div>
 
 				  <div class="col">
-				     <div class="form-group">
-				      <label for="place_of_birth">Place of Birth</label>
-				      <input type="text" class="form-control" id="place_of_birth" name="place_of_birth" required autocomplete="off" value="{{ old('place_of_birth') }}">
+				    <div class="form-group">
+				      <label for="middle_name">Wife Date of Birth</label>
+				      <input type="text" class="form-control" value="{{ $w->birthday }}" readonly>
 				    </div>
 				  </div>
 				</div>
 
-				<div class="row">
-				  <div class="col">
-				    <div class="form-group">
-				      <label for="gender">Gender</label>
-				      <select class="form-control" id="gender" name="gender">
-				        <option value="Male" {{ old('gender') == 'Male' ? 'selected' : ''}}>Male</option>
-				        <option value="Female" {{ old('gender') == 'Female' ? 'selected' : ''}}>Female</option>
-				      </select>
-				    </div>
-				  </div>  
-
-				  <div class="col">
-				    <div class="form-group">
-				      <label for="date_of_birth">Date of Birth</label>
-				      <input type="date" class="form-control" id="date_of_birth date" name="date_of_birth" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_birth') }}">
-				    </div>
-				  </div>
-				</div>
 
 				<div class="row">		   
 				  <div class="col">
 				    <div class="form-group">
-				      <label for="date_of_birth">Date of Seminar</label>
-				      <input type="date" class="form-control" id="date_of_seminar date" name="date_of_seminar" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_seminar') }}">
+				      <label for="date_of_birth">Husband Place of Birth</label>
+				      <input type="text" class="form-control" value="{{ $h->place_of_birth }}" readonly>
 				    </div>
 				  </div>
 
 				  <div class="col">
 				    <div class="form-group">
-				      <label for="date_of_birth">Date of Baptismal</label>
-				      <input type="date" class="form-control" id="date_of_baptismal date" name="date_of_baptismal" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_baptismal') }}">
+				      <label for="date_of_birth">Wife Place of Birth</label>
+				      <input type="text" class="form-control" value="{{ $w->place_of_birth }}" readonly>
 				    </div>
 				  </div>
 				</div>
 
+				<h3 class="mt-5">Husband Personal Details</h3>
 				<div class="row">	
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="date_of_birth">Status</label>
+				      <select class="form-control" name="husband_status">
+				      	<option value="">-- Select --</option>
+				      	@foreach($status as $s)
+				        	<option value="{{$s}}">{{$s ?? ''}}</option>
+				        @endforeach
+				      </select>
+				    </div>
+				  </div>
+
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="date_of_birth">Education Status</label>
+				      <select class="form-control" name="husband_education">
+				      	<option value="">-- Select --</option>
+				      	@foreach($educ_status as $s)
+				        	<option value="{{$s}}">{{$s ?? ''}}</option>
+				        @endforeach
+				      </select>
+				    </div>
+				  </div>				  				  				  
+				</div>
+
+				<div class="row">
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="date_of_birth">Parents types of Marriage</label>
+				      <select class="form-control" name="husband_parents_type_of_marriage">
+				      	<option value="">-- Select --</option>
+				      	@foreach($parents as $s)
+				        	<option value="{{$s}}">{{$s ?? ''}}</option>
+				        @endforeach
+				      </select>
+				    </div>
+				  </div>			  
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="date_of_birth">Parents Marriage Place</label>
+				      <input type="text" name="husband_parents_marriage_place" class="form-control">
+				    </div>
+				  </div>				  				  
+				</div>
+
+				<h3 class="mt-5">Wife Personal Details</h3>
+				<div class="row">	
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="date_of_birth">Status</label>
+				      <select class="form-control" name="wife_status">
+				      	<option value="">-- Select --</option>
+				      	@foreach($status as $s)
+				        	<option value="{{$s}}">{{$s ?? ''}}</option>
+				        @endforeach
+				      </select>
+				    </div>
+				  </div>
+
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="date_of_birth">Education Status</label>
+				      <select class="form-control" name="wife_education">
+				      	<option value="">-- Select --</option>
+				      	@foreach($educ_status as $s)
+				        	<option value="{{$s}}">{{$s ?? ''}}</option>
+				        @endforeach
+				      </select>
+				    </div>
+				  </div>				  				  				  
+				</div>
+
+				<div class="row">
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="date_of_birth">Parents types of Marriage</label>
+				      <select class="form-control" name="wife_parents_type_of_marriage">
+				      	<option value="">-- Select --</option>
+				      	@foreach($parents as $s)
+				        	<option value="{{$s}}">{{$s ?? ''}}</option>
+				        @endforeach
+				      </select>
+				    </div>
+				  </div>			  
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="date_of_birth">Parents Marriage Place</label>
+				      <input type="text" name="wife_parents_marriage_place" class="form-control">
+				    </div>
+				  </div>				  				  
+				</div>
+
+				<h3 class="mt-5">Marriage Details</h3>
+				<div class="row">	
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="date_of_birth">Date of Seminar</label>
+				      <input type="date" class="form-control" name="date_of_seminar" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_seminar') }}">
+				    </div>
+				  </div>
+
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="date_of_birth">Date of Marriage</label>
+				      <input type="date" class="form-control" name="date_of_marriage" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_marriage') }}">
+				    </div>
+				  </div>				  
+				</div>
+
+				<div class="row">
 				  <div class="col-sm-6">
 				    <div class="form-group">
-				      <label for="gender">Church of Baptism</label>
+				      <label for="gender">Church of Marriage</label>
 				      <select class="form-control" name="church_id" required id="church">
 				        <option value="">-- Select --</option>
 				        @foreach($church as $c)
@@ -105,62 +200,9 @@
 				      <input type="text" class="form-control" id="fathers_name" name="other_church" autocomplete="off">
 				    </div>
 				  </div> 		  		  	   		  
-				</div>
+				</div>							
 
-				<h3 class="mt-5">Parents Information</h3>
-				<div class="row">
-				  <div class="col">
-				    <div class="form-group">
-				      <label for="fathers_name">Father's Name</label>
-				      <input type="text" class="form-control" id="fathers_name" name="fathers_name" required autocomplete="off" value="{{ old('fathers_name') }}">
-				    </div>
-				  </div>
-
-				  <div class="col">
-				    <div class="form-group">
-				      <label for="mothers_maiden_name">Mother's maiden Name</label>
-				      <input type="text" class="form-control" id="mothers_maiden_name" name="mothers_maiden_name" required autocomplete="off" value="{{ old('mothers_maiden_name') }}">
-				    </div>
-				  </div>
-				</div>
-
-				<div class="row">
-				  <div class="col">
-				    <div class="form-group">
-				      <label for="parents_type_of_marriage">Parents type of Marriage</label>
-				       <select class="form-control" id="parents_type_of_marriage" name="parents_type_of_marriage" value="{{ old('parents_type_of_marriage') }}">
-				        <option value="Church">Church</option>
-				        <option value="Civil">Civil</option>
-				        <option value="Not-married">Not-married</option>
-				      </select>
-				    </div>
-				  </div>
-
-				  <div class="col">
-				    <div class="form-group">
-				      <label for="contact_number">Parents Marriage Place</label>
-				      <input type="text" class="form-control" name="parents_marriage_place"  required autocomplete="off" value="{{ old('parents_marriage_place') }}">
-				    </div>
-				  </div>
-				</div>
-
-				<div class="row">
-				   <div class="col">
-				    <div class="form-group">
-				      <label for="contact_number">Contact Number</label>
-				      <input type="text" class="form-control" id="contact_number" name="contact_number"  required autocomplete="off" value="{{ old('contact_number') }}">
-				    </div>
-				  </div>
-				  <div class="col-sm-6">
-				    <div class="form-group">
-				      <label for="parents_address">Parents Address</label>
-				      <input type="text" class="form-control" id="parents_address" name="parents_address" required autocomplete="off" value="{{ old('parents_address') }}">
-				    </div>
-				  </div>
-				</div>								
-
-				<h3 class="mt-5">Sponsor Details</h3>
-				<div class="form-group" >
+				<div class="form-group mt-5">
 				   <table class="table">
 				      <thead>
 				       <tr>
@@ -191,8 +233,7 @@
 				   </table>
 				</div>
 
-				<h3 class="mt-5">Facilitators Details</h3>
-				<div class="row">
+				<div class="row mt-5">
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="facilitator_1">Primary Facilitator</label>

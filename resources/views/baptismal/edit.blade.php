@@ -145,13 +145,19 @@
 
 				  <div class="col">
 				    <div class="form-group">
-				      <label for="contact_number">Contact Number</label>
-				      <input type="text" class="form-control form_data" id="contact_number" name="contact_number"  required autocomplete="off" value="{{ $b->contact_number ?? '' }}" readonly>
+				      <label for="contact_number">Parents Marriage Place</label>
+				      <input type="text" class="form-control form_data" name="parents_marriage_place"  required autocomplete="off" value="{{ $b->parents_marriage_place ?? '' }}" readonly>
 				    </div>
 				  </div>
 				</div>
 
 				<div class="row">
+				  <div class="col">
+				    <div class="form-group">
+				      <label for="contact_number">Contact Number</label>
+				      <input type="text" class="form-control form_data" id="contact_number" name="contact_number"  required autocomplete="off" value="{{ $b->contact_number ?? '' }}" readonly>
+				    </div>
+				  </div>
 				  <div class="col-sm-6">
 				    <div class="form-group">
 				      <label for="parents_address">Parents Address</label>

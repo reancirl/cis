@@ -32,7 +32,22 @@ class MarriageController extends Controller
             return $baptismal->get();
         }
         if ($request->Husband && $request->Wife) {
-            return 'success';
+            $husband_valid = Baptismal::validity()
+                                      ->where('gender','Male');
+            $h = $husband_valid->where('baptismals.id',$request->Husband)                    
+                       ->first(); 
+            $wife_valid = Baptismal::validity()
+                                      ->where('gender','FeMale');
+            $w = $wife_valid->where('baptismals.id',$request->Wife)
+                       ->first(); 
+            if (!$h || !$w) {
+                return redirect()->back()->with('error','Data not applicable');
+            }
+            $church = Church::orderBy('name')->get();
+            $status = ['Never Married','Widowed','Common-law','Married','Annulled Marriage'];
+            $educ_status = ['No Secondary','Trade/Apprenticeship','Non-university certificate/diploma','Secondary'];
+            $parents = ['Nor-married','Civil','Church'];
+            return view('marriage.create',compact('h','w','church','status','educ_status','parents'));
         }
         return view('marriage.search',compact('request'));
     }
@@ -60,7 +75,7 @@ class MarriageController extends Controller
 
     public function store(Request $request)
     {
-        //
+        return $request->all();
     }
 
     public function edit(Marriage $marriage)

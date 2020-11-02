@@ -70,6 +70,7 @@ class BaptismalController extends Controller
         $b->parents_address = ucwords($request->parents_address);
         $b->contact_number = $request->contact_number;
         $b->parents_type_of_marriage = ucwords($request->parents_type_of_marriage);
+        $b->parents_marriage_place = ucwords($request->parents_marriage_place);
         $b->created_by = auth()->user()->id;
         $b->save();
         if ($request->sponsor_name) {
@@ -131,6 +132,7 @@ class BaptismalController extends Controller
         $b->parents_address = ucwords($request->parents_address);
         $b->contact_number = $request->contact_number;
         $b->parents_type_of_marriage = ucwords($request->parents_type_of_marriage);
+        $b->parents_marriage_place = ucwords($request->parents_marriage_place);
         $b->created_by = auth()->user()->id;
         $b->update();
         if ($request->sponsor_name) {

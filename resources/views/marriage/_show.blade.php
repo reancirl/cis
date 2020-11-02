@@ -53,7 +53,7 @@
         var tr = $('<tr>');
         tr.append('<td>' + data.label +'</td>');
         tr.append('<td>' + data.full_name +'</td>');
-        tr.append('<td>' + data.age +'</td>');
+        tr.append('<td>' + data.age +' <input type="hidden" name="' + data.label + '" value="' + data.bap['id'] + '"> </td>');
         table.append(tr);
         if (data.label == 'Husband') {
           $('#form-husband-search input').prop('readonly',true);

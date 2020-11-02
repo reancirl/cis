@@ -81,30 +81,32 @@
 		</div>
 
 		<div id="couple_data" style="display:none;">
-			<div class="row">
-				<div class="col-sm-3"></div>
-				<div class="col-sm-6">
-					<div class="card mt-4">
-					    <div class="card-block">
-					        <table id="couple_table" class="table table-responsive-xxs">
-					            <thead>
-					            	<th width="30%">Label</th>
-					            	<th width="60%">Full Name</th>
-					            	<th width="10%">Age</th>
-					            </thead>
-					            <tbody></tbody> 				                                                                                      
-					        </table>
-					    </div>
+			<form method="GET">
+				<div class="row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+						<div class="card mt-4">
+						    <div class="card-block">
+						        <table id="couple_table" class="table table-responsive-xxs">
+						            <thead>
+						            	<th width="30%">Label</th>
+						            	<th width="60%">Full Name</th>
+						            	<th width="10%">Age</th>
+						            </thead>
+						            <tbody></tbody> 				                                                                                      
+						        </table>
+						    </div>
+						</div>
+					</div>
+					<div class="col-sm-3"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 d-flex justify-content-center">
+						<a href="{{ url('marriage/create') }}" class="btn btn-secondary btn-md"><i class="fas fa-sync"></i> Refresh Page</a>&nbsp&nbsp
+						<button type="submit" class="btn btn-primary btn-md" style="display:none"><i class="fa fa-plus"></i> Create Marriage Record</button>
 					</div>
 				</div>
-				<div class="col-sm-3"></div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12 d-flex justify-content-center">
-					<a href="{{ url('marriage/create') }}" class="btn btn-secondary btn-md"><i class="fas fa-sync"></i> Refresh Page</a>&nbsp&nbsp
-					<button type="button" class="btn btn-primary btn-md" style="display:none"><i class="fa fa-plus"></i> Create Marriage Record</button>
-				</div>
-			</div>
+			</form>			
 		</div>							
     </div>
     <div class="append-div"></div>

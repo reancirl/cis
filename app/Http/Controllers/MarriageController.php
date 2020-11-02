@@ -30,8 +30,11 @@ class MarriageController extends Controller
             $baptismal = search_name($request->wife_name);
             $baptismal = $baptismal->wife();
             return $baptismal->get();
-        }        
-        return view('marriage.create',compact('request'));
+        }
+        if ($request->Husband && $request->Wife) {
+            return 'success';
+        }
+        return view('marriage.search',compact('request'));
     }
 
     public function show(Request $request,$id)

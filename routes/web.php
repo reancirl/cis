@@ -55,4 +55,8 @@ Route::group(['prefix' => 'marriage', 'middleware' => 'auth'], function(){
 	Route::get('/', [MarriageController::class, 'index']);
 	Route::get('/create', [MarriageController::class, 'create']);
 	Route::get('/show/{id}', [MarriageController::class, 'show']);
+	Route::post('/', [MarriageController::class, 'store']);
+	Route::get('/edit/{id}', [MarriageController::class, 'edit']);
+	Route::patch('/update/{id}', [MarriageController::class, 'update']);
+	Route::delete('/delete/{id}', [MarriageController::class, 'destroy']);
 });

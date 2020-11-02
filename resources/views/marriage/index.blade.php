@@ -46,7 +46,7 @@
 		                                <th>
 		                                    <button type="submit" class="btn btn-primary btn-block">Filter</button>
 		                                    @if($request->filter)
-		                                    	<a href="{{ url('/baptismal') }}" class="btn btn-outline-danger btn-block">Clear Filter</button>
+		                                    	<a href="{{ url('/marriage') }}" class="btn btn-outline-danger btn-block">Clear Filter</button>
 		                                    @endif
 		                                </th>
 		                            </tr>
@@ -57,7 +57,55 @@
 		        </div>
 		    </div>
 		</div>
-
+		@if($request->filter)
+	        <div class="card">
+	            <div class="card-block">
+	                <table id="" class="table table-hover table-responsive-sm">
+	                    <thead>
+	                        <tr>
+	                            <th width="3%">#</th>
+	                            <th>Husband Name</th>
+	                            <th>Wife Name</th>
+	                            <th>Church</th>
+	                            <th>Date of Marriage</th>
+	                            <th class="text-center">Action</th>                 
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                        @foreach ($marriages as $i => $m)
+	                            <tr>
+	                            	<td>{{++$i}}</td>
+	                            	<td>{{$m->husband->full_name ?? ''}}</td>
+	                            	<td>{{$m->wife->full_name ?? ''}}</td>
+	                            	<td>{{$m->church->name ?? $m->other_church}}</td>
+	                            	<td>{{ $m->marriage_date ?? '' }}</td>
+	                            	<td class="text-center">
+	                            		<div class="dropdown show">
+	                            			<a class="dropdown-toggle btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                            		    	Actions
+	                            		  	</a>
+	                            		  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+	                            		    	<a class="dropdown-item edit-button" href="{{ url('marriage/edit', $m->id) }}"><i class="fa fa-eye"></i> Edit Record</a>
+	                            		    	<form action="{{ url('marriage/delete', $m->id )}}" method="post" class="form-delete">
+	                            		    		@csrf
+	                            		    		@method('DELETE')
+	                            		    		<button type="submit" class="dropdown-item delete_btn" href="#"><i class="fa fa-trash"></i> Delete</button>                         		    	
+	                            		    	</form>
+	                            		  	</div>
+	                            		</div>
+	                            	</td>
+	                            </tr>
+	                        @endforeach
+	                    </tbody>                                                                            
+	                </table>
+	            </div>
+	        </div>
+	        <div class="row">
+	        	<div class="col d-flex justify-content-center">
+	            	{{ $marriages->links() }}       		
+	        	</div>
+	        </div>
+        @endif
     </div>
 @endsection
 @section('scripts')

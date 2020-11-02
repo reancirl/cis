@@ -200,7 +200,7 @@
 	        let last=$('#sponsor_table tr').length;
 	        if(last==1){
         		swal({
-        		    text: 'Baptismal must have atleast 1 sponsor',
+        		    text: 'Confirmation must have atleast 1 sponsor',
         		    icon: 'error',
         		    buttons: false,
         		});

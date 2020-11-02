@@ -1,36 +1,35 @@
 @extends('layouts.app')
 
-@section('title','Add Marriage')
+@section('title','Edit Marriage')
 
 @section('content')
     <div class="container-fluid">  
     	<div class="row mb-3">
     		<div class="col-sm-12">
     			<h2 class="pt-2"> 
-    				Add Marriage 
+    				Edit Marriage 
     				<a class="btn btn-outline-primary btn-sm" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i> Go back</a>    			   		        
     			</h2>
     		</div>
     	</div>    
     	<hr>
 		@include('layouts.include.alerts') 			
-		<form method="POST" action="{{ url('/marriage') }}" id="form_create">
+		<form method="POST" action="{{ url('marriage/update',$m->id) }}" id="form_create">
 			@csrf
+			@method('PATCH')
 			<div>
-				<input type="hidden" name="wife_id" value="{{ $w->baptismal_id }}">
-				<input type="hidden" name="husband_id" value="{{ $h->baptismal_id }}">
 				<div class="row">
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="first_name">Husband Name</label>
-				        <input type="text" class="form-control" value="{{ $h->full_name }}" readonly>
+				        <input type="text" class="form-control" value="{{ $m->husband->full_name }}" readonly>
 				    </div>
 				  </div>
 
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="first_name">Wife Name</label>
-				        <input type="text" class="form-control" value="{{ $w->full_name }}" readonly>
+				        <input type="text" class="form-control" value="{{ $m->wife->full_name }}" readonly>
 				    </div>
 				  </div>
 				</div>
@@ -40,14 +39,14 @@
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="middle_name">Husband Date of Birth</label>
-				      <input type="text" class="form-control" value="{{ $h->birthday }}" readonly>
+				      <input type="text" class="form-control" value="{{ $m->husband->birthday }}" readonly>
 				    </div>
 				  </div>
 
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="middle_name">Wife Date of Birth</label>
-				      <input type="text" class="form-control" value="{{ $w->birthday }}" readonly>
+				      <input type="text" class="form-control" value="{{ $m->wife->birthday }}" readonly>
 				    </div>
 				  </div>
 				</div>
@@ -57,14 +56,14 @@
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="date_of_birth">Husband Place of Birth</label>
-				      <input type="text" class="form-control" value="{{ $h->place_of_birth }}" readonly>
+				      <input type="text" class="form-control" value="{{ $m->husband->place_of_birth }}" readonly>
 				    </div>
 				  </div>
 
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="date_of_birth">Wife Place of Birth</label>
-				      <input type="text" class="form-control" value="{{ $w->place_of_birth }}" readonly>
+				      <input type="text" class="form-control" value="{{ $m->wife->place_of_birth }}" readonly>
 				    </div>
 				  </div>
 				</div>
@@ -77,7 +76,7 @@
 				      <select class="form-control" name="husband_status">
 				      	<option value="">-- Select --</option>
 				      	@foreach($status as $s)
-				        	<option value="{{$s}}">{{$s ?? ''}}</option>
+				        	<option value="{{$s}}" {{$s == $m->husband_status ? 'selected' : ''}}>{{$s ?? ''}}</option>
 				        @endforeach
 				      </select>
 				    </div>
@@ -89,7 +88,7 @@
 				      <select class="form-control" name="husband_education">
 				      	<option value="">-- Select --</option>
 				      	@foreach($educ_status as $s)
-				        	<option value="{{$s}}">{{$s ?? ''}}</option>
+				        	<option value="{{$s}}" {{$s == $m->husband_education ? 'selected' : ''}}>{{$s ?? ''}}</option>
 				        @endforeach
 				      </select>
 				    </div>
@@ -103,7 +102,7 @@
 				      <select class="form-control" name="husband_parents_type_of_marriage">
 				      	<option value="">-- Select --</option>
 				      	@foreach($parents as $s)
-				        	<option value="{{$s}}">{{$s ?? ''}}</option>
+				        	<option value="{{$s}}" {{$s == $m->husband->parents_type_of_marriage ? 'selected' : ''}}>{{$s ?? ''}}</option>
 				        @endforeach
 				      </select>
 				    </div>
@@ -111,7 +110,7 @@
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="date_of_birth">Parents Marriage Place</label>
-				      <input type="text" name="husband_parents_marriage_place" class="form-control">
+				      <input type="text" name="husband_parents_marriage_place" class="form-control" value="{{ $m->husband->parents_marriage_place ?? '' }}">
 				    </div>
 				  </div>				  				  
 				</div>
@@ -124,7 +123,7 @@
 				      <select class="form-control" name="wife_status">
 				      	<option value="">-- Select --</option>
 				      	@foreach($status as $s)
-				        	<option value="{{$s}}">{{$s ?? ''}}</option>
+				        	<option value="{{$s}}" {{$s == $m->wife_status ? 'selected' : ''}}>{{$s ?? ''}}</option>
 				        @endforeach
 				      </select>
 				    </div>
@@ -136,7 +135,7 @@
 				      <select class="form-control" name="wife_education">
 				      	<option value="">-- Select --</option>
 				      	@foreach($educ_status as $s)
-				        	<option value="{{$s}}">{{$s ?? ''}}</option>
+				        	<option value="{{$s}}" {{$s == $m->wife_education ? 'selected' : ''}}>{{$s ?? ''}}</option>
 				        @endforeach
 				      </select>
 				    </div>
@@ -150,7 +149,7 @@
 				      <select class="form-control" name="wife_parents_type_of_marriage">
 				      	<option value="">-- Select --</option>
 				      	@foreach($parents as $s)
-				        	<option value="{{$s}}">{{$s ?? ''}}</option>
+				        	<option value="{{$s}}" {{$s == $m->wife->parents_type_of_marriage ? 'selected' : ''}}>{{$s ?? ''}}</option>
 				        @endforeach
 				      </select>
 				    </div>
@@ -158,7 +157,7 @@
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="date_of_birth">Parents Marriage Place</label>
-				      <input type="text" name="wife_parents_marriage_place" class="form-control">
+				      <input type="text" name="wife_parents_marriage_place" class="form-control" value="{{ $m->wife->parents_marriage_place }}">
 				    </div>
 				  </div>				  				  
 				</div>
@@ -168,36 +167,36 @@
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="date_of_birth">Date of Seminar</label>
-				      <input type="date" class="form-control" name="date_of_seminar" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_seminar') }}">
+				      <input type="date" class="form-control" name="date_of_seminar" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ $m->date_of_seminar ?? '' }}">
 				    </div>
 				  </div>
 
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="date_of_birth">Date of Marriage</label>
-				      <input type="date" class="form-control" name="date_of_marriage" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ old('date_of_marriage') }}">
+				      <input type="date" class="form-control" name="date_of_marriage" placeholder="dd/mm/yyyy" required autocomplete="off" value="{{ $m->date_of_marriage ?? '' }}">
 				    </div>
 				  </div>				  
 				</div>
 
-				<div class="row">
+				<div class="row">	
 				  <div class="col-sm-6">
 				    <div class="form-group">
-				      <label for="gender">Church of Marriage</label>
-				      <select class="form-control" name="church_id" required id="church">
+				      <label for="church">Church of Baptism</label>
+				      <select class="form-control" name="church_id" id="church">
 				        <option value="">-- Select --</option>
 				        @foreach($church as $c)
-				        	<option value="{{$c->id}}">{{$c->name ?? ''}}</option>
+				        	<option value="{{$c->id}}" {{ $m->church_id == $c->id ? 'selected' : '' }}>{{$c->name ?? ''}}</option>
 				        @endforeach
-				        <option value="others">Others (Please Specify)</option>
+				        <option value="others" {{ $m->other_church ? 'selected' : '' }}>Others (Please Specify)</option>
 				      </select>
 				    </div>
 				  </div> 
 
-				  <div class="col-sm-6" style="display:none" id="other_church">
+				  <div class="col-sm-6" style="{{$m->other_church ? '' : 'display:none' }}" id="other_church">
 				    <div class="form-group">
 				      <label for="fathers_name">Specify Church here:</label>
-				      <input type="text" class="form-control" id="fathers_name" name="other_church" autocomplete="off">
+				      <input type="text" class="form-control form_data" id="fathers_name" name="other_church" autocomplete="off" value="{{ $m->other_church ?? '' }}">
 				    </div>
 				  </div> 		  		  	   		  
 				</div>							
@@ -211,9 +210,12 @@
 				      </thead>
 
 				      <tbody id="sponsor_table">
-				       <tr class="sponsor_rows">
-				         <td><input type="text" name="sponsor_name[]" class="form-control" required autocomplete="off"></td>				         
-				       </tr>
+				      	@foreach($m->sponsors as $s)
+							<tr class="sponsor_rows">
+								<input type="hidden" name="sponsor_id[]" value="{{ $s->id }}">
+								<td><input type="text" name="sponsor_name[]" class="form-control text-center" required autocomplete="off" value="{{$s->sponsor_name}}"></td>				         
+							</tr>
+						@endforeach
 				      </tbody>
 				      <tfoot>
 				      	<tr>
@@ -230,14 +232,14 @@
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="facilitator_1">Primary Facilitator</label>
-				      <input type="text" class="form-control" id="facilitator_1" name="facilitator_1" required autocomplete="off" placeholder="Priest Name" value="{{ old('facilitator_1') }}">
+				      <input type="text" class="form-control" id="facilitator_1" name="facilitator_1" required autocomplete="off" placeholder="Priest Name" value="{{ $m->facilitator->facilitator_1 ?? '' }}">
 				    </div>
 				  </div>
 
 				  <div class="col">
 				    <div class="form-group">
 				      <label for="facilitator_2">Facilitator 2</label>
-				      <input type="text" class="form-control" id="facilitator_2" name="facilitator_2" autocomplete="off" value="{{ old('facilitator_2') }}">
+				      <input type="text" class="form-control" id="facilitator_2" name="facilitator_2" autocomplete="off" value="{{ $m->facilitator->facilitator_2 ?? '' }}">
 				    </div>
 				  </div>
 				</div>
@@ -245,12 +247,12 @@
 				  <div class="col-sm-6">
 				    <div class="form-group">
 				      <label for="facilitator_3">Facilitator 3</label>
-				      <input type="text" class="form-control" id="facilitator_3" name="facilitator_3" autocomplete="off" value="{{ old('facilitator_3') }}">
+				      <input type="text" class="form-control" id="facilitator_3" name="facilitator_3" autocomplete="off" value="{{ $m->facilitator->facilitator_3 ?? '' }}">
 				    </div>
 				  </div>
 				</div>
 
-				<button type="button" class="btn btn-primary btn-lg btn-block mt-5" id="btn_submit">Add Record</button>
+				<button type="button" class="btn btn-primary btn-lg btn-block mt-5" id="btn_submit">Edit Record</button>
 			</div>
 		</form>		
     </div>
@@ -264,9 +266,9 @@
 	    function addRow()
 	    {
 	        let tr='<tr class="sponsor_rows">'+
-	        '<td><input type="text" name="sponsor_name[]" class="form-control" required autocomplete="off"></td>'+
+	        '<td><input type="text" name="sponsor_name[]" class="form-control text-center" required autocomplete="off"></td>'+
 	        '</tr>';
-	        $('#sponsor_table').append(tr);
+ 	        $('#sponsor_table').append(tr);
 	    };
 
 	    $('#btn_submit').on('click', function() {

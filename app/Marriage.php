@@ -41,23 +41,27 @@ class Marriage extends Model
         return date('F d, Y', strtotime($this->date_of_marriage));
     }
 
-    public function scopeSearch($query,$name){
-        $query->join('baptismals as b', 'b.id', 'marriages.husband_id')
-        		->join('baptismals as c', 'c.id', 'marriages.wife_id')
-	            ->select('b.*','marriages.*','c.*')
+    public function scopeWife($query,$name){
+        $query->join('baptismals as b', 'b.id', 'marriages.wife_id')
+	            ->select('b.*','marriages.*')
 	            ->whereRaw('(b.first_name LIKE "%' . $name. '%" 
 	                OR b.middle_name LIKE "%' . $name. '%" 
 	                OR b.last_name LIKE "%' . $name. '%"
 	                OR concat(b.first_name," ",b.last_name) LIKE "%' . $name. '%"
 	                OR concat(b.last_name,", ",b.first_name) LIKE "%' . $name. '%"
 	                OR concat(b.last_name,",",b.first_name) LIKE "%' . $name. '%"
-	                OR concat(b.first_name," ",b.middle_name," ",b.last_name) LIKE "%' . $name. '%"
-	            	OR c.first_name LIKE "%' . $name. '%" 
-	                OR c.middle_name LIKE "%' . $name. '%" 
-	                OR c.last_name LIKE "%' . $name. '%"
-	                OR concat(c.first_name," ",c.last_name) LIKE "%' . $name. '%"
-	                OR concat(c.last_name,", ",c.first_name) LIKE "%' . $name. '%"
-	                OR concat(c.last_name,",",c.first_name) LIKE "%' . $name. '%"
-	                OR concat(c.first_name," ",c.middle_name," ",c.last_name) LIKE "%' . $name. '%")');
+	                OR concat(b.first_name," ",b.middle_name," ",b.last_name) LIKE "%' . $name. '%")');
+    }
+
+    public function scopeHusband($query,$name){
+        $query->join('baptismals as b', 'b.id', 'marriages.husband_id')
+	            ->select('b.*','marriages.*')
+	            ->whereRaw('(b.first_name LIKE "%' . $name. '%" 
+	                OR b.middle_name LIKE "%' . $name. '%" 
+	                OR b.last_name LIKE "%' . $name. '%"
+	                OR concat(b.first_name," ",b.last_name) LIKE "%' . $name. '%"
+	                OR concat(b.last_name,", ",b.first_name) LIKE "%' . $name. '%"
+	                OR concat(b.last_name,",",b.first_name) LIKE "%' . $name. '%"
+	                OR concat(b.first_name," ",b.middle_name," ",b.last_name) LIKE "%' . $name. '%")');
     }
 }

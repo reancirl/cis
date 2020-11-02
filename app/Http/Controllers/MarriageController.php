@@ -19,13 +19,17 @@ class MarriageController extends Controller
         $marriages = Marriage::active();
 
         if ($request->name) {
-            $marriages = $marriages->search($request->name);
+            $marriages = $marriages->husband($request->name);
+            if ($marriages->count() == 0) {
+                $marriages = Marriage::active();
+                $marriages = $marriages->wife($request->name);
+            }
         } 
         if ($request->church) {
             if ($request->church == 'others') {
-                 $marriages = $marriages->whereNull('church_id');
+                 $marriages = $marriages->whereNull('marriages.church_id');
             } else {
-                $marriages = $marriages->where('church_id',$request->church); 
+                $marriages = $marriages->where('marriages.church_id',$request->church); 
             }                       
         }
         $marriages = $marriages->orderByDesc('marriages.created_at')->paginate(10);

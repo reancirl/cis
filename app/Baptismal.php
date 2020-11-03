@@ -10,7 +10,7 @@ class Baptismal extends Model
     protected $guarded = [];
 
     public function scopeActive($query){
-        $query->where('is_deleted',0);
+        $query->where('baptismals.is_deleted',0);
     } 
 
     public function scopeCommunions($query){
@@ -28,12 +28,12 @@ class Baptismal extends Model
     } 
 
     public function scopeHusband($query){
-        $query->leftjoin('confirmations as f', 'f.baptismal_id', 'baptismals.id')
+        $query->leftjoin('confirmations as c', 'c.baptismal_id', 'baptismals.id')
               ->leftjoin('marriages as m', 'm.husband_id', 'baptismals.id')
-              ->whereNotNull('f.baptismal_id')
+              ->whereNotNull('c.baptismal_id')
               ->whereNull('m.husband_id')
               ->where('baptismals.gender','Male')
-              ->select('baptismals.*','f.*','m.*');;
+              ->select('baptismals.*','c.*','m.*');
     }
 
     public function scopeWife($query){
@@ -53,6 +53,16 @@ class Baptismal extends Model
               ->whereNull('m.husband_id')              
               ->select('baptismals.*','f.*','m.*');
     } 
+
+    public function scopeSearch($query,$name){
+        $query->whereRaw('(baptismals.first_name LIKE "%' . $name. '%" 
+                  OR baptismals.middle_name LIKE "%' . $name. '%" 
+                  OR baptismals.last_name LIKE "%' . $name. '%"
+                  OR concat(baptismals.first_name," ",baptismals.last_name) LIKE "%' . $name. '%"
+                  OR concat(baptismals.last_name,", ",baptismals.first_name) LIKE "%' . $name. '%"
+                  OR concat(baptismals.last_name,",",baptismals.first_name) LIKE "%' . $name. '%"
+                  OR concat(baptismals.first_name," ",baptismals.middle_name," ",baptismals.last_name) LIKE "%' . $name. '%")');
+    }
 
 	  public function church()
     {

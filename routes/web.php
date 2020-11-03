@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChurchController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\MarriageController;
 use App\Http\Controllers\BaptismalController;
 use App\Http\Controllers\ConfirmationController;
@@ -59,4 +60,9 @@ Route::group(['prefix' => 'marriage', 'middleware' => 'auth'], function(){
 	Route::get('/edit/{id}', [MarriageController::class, 'edit']);
 	Route::patch('/update/{id}', [MarriageController::class, 'update']);
 	Route::delete('/delete/{id}', [MarriageController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'import-records', 'middleware' => 'auth'], function(){
+	Route::get('/', [ImportController::class, 'index']);
+	Route::post('/baptismal', [ImportController::class, 'baptismal']);
 });

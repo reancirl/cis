@@ -41,13 +41,13 @@ class MarriageController extends Controller
     {
         if ($request->husband_name) {
             $baptismal = Baptismal::active();
-            $baptismal = search_name($request->husband_name);
+            $baptismal = $baptismal->search($request->husband_name);
             $baptismal = $baptismal->husband();
             return $baptismal->get();
         }
         if ($request->wife_name) {
             $baptismal = Baptismal::active();
-            $baptismal = search_name($request->wife_name);
+            $baptismal = $baptismal->search($request->wife_name);
             $baptismal = $baptismal->wife();
             return $baptismal->get();
         }

@@ -34,7 +34,7 @@ class FirstCommunionController extends Controller
         $baptismals = [];
         if ($request->name) {
             $baptismals = Baptismal::active();
-            $baptismals = search_name($request->name);
+            $baptismals = $baptismals->search($request->name);
             $baptismals = $baptismals->communions();
             if ($baptismals->count() == 0) {
                 return redirect()->back()->with('error','No record found!');

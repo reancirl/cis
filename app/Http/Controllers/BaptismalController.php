@@ -17,7 +17,7 @@ class BaptismalController extends Controller
         $baptismals = Baptismal::active();   
 
         if ($request->name) {
-            $baptismals = search_name($request->name);
+            $baptismals = $baptismals->search($request->name);
         }
         if ($request->church) {
             if ($request->church == 'others') {

@@ -18,7 +18,7 @@
 			<div class="col-sm-5">
 				<form id="form-husband-search">
 				    <div class="row">
-				        <div class="col-sm-10">
+				        <div class="col-sm-9">
 				            <input type="text" name="husband_name" class="form-control" placeholder="Search Husband Record .." autocomplete="off">
 				            <div class="row">
 				            	<div class="col-sm-10">
@@ -38,7 +38,7 @@
 				            	</div>
 				            </div>				             
 				        </div>
-				        <div class="col-sm-2">
+				        <div class="col-sm-3">
 				            <button type="submit" class="btn btn-primary btn-md btn-block"><i class="fa fa-search"></i><i class="fa fa-spin fa-spinner loader_icon" style="display:none"></i> Search</button>
 				            <span class="badge badge-pill badge-success" style="display:none"><i class="fa fa-check"></i> Husband Added</span>
 				        </div>
@@ -51,7 +51,7 @@
 			<div class="col-sm-5">
 				<form id="form-wife-search">
 				    <div class="row">
-				        <div class="col-sm-10">
+				        <div class="col-sm-9">
 				            <input type="text" name="wife_name" class="form-control" placeholder="Search Wife Record .." autocomplete="off">
 				            <div class="row">
 				            	<div class="col-sm-10">
@@ -71,7 +71,7 @@
 				            	</div>
 				            </div>				             
 				        </div>
-				        <div class="col-sm-2">
+				        <div class="col-sm-3">
 				            <button type="submit" class="btn btn-primary btn-md btn-block"><i class="fa fa-search"></i><i class="fa fa-spin fa-spinner loader_icon" style="display:none"></i> Search</button>
 				            <span class="badge badge-pill badge-success" style="display:none"><i class="fa fa-check"></i> Wife Added</span>
 				        </div>

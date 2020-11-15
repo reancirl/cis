@@ -11,8 +11,8 @@ class ImportController extends Controller
 {
     public function index()
     {
-        $columns = ['first_name', 'middle_name', 'last_name', 'date_of_birth', 'gender' , 'place_of_birth', 'fathers_name', 'mothers_maiden_name', 'parents_address' , 'contact_number', 'parents_type_of_marriage', 'parents_marriage_place', 'church', 'date_of_seminar', 'date_of_baptismal' , 'facilitator_1', 'facilitator_2', 'facilitator_3'];
-        return view('import.baptismal',compact('columns'));
+        $baptismal_columns = ['first_name', 'middle_name', 'last_name', 'date_of_birth', 'gender' , 'place_of_birth', 'fathers_name', 'mothers_maiden_name', 'parents_address' , 'contact_number', 'parents_type_of_marriage', 'parents_marriage_place', 'church', 'date_of_seminar', 'date_of_baptismal' , 'facilitator_1', 'facilitator_2', 'facilitator_3'];
+        return view('import.index',compact('baptismal_columns'));
     }
 
     public function baptismal(Request $request)

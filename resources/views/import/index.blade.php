@@ -42,7 +42,7 @@
 		                    <table class="table table-xxs table-bordered" id="table-import">
 		                        <thead>
 		                            <tr>
-		                                @foreach($columns as $i => $col)
+		                                @foreach($baptismal_columns as $i => $col)
 		                                <th>{{ $col }}</th>
 		                                @endforeach
 		                            </tr>
@@ -50,7 +50,7 @@
 		                        <tbody></tbody>
 		                    </table>
 		                </div>
-		                <div class="float-right m-3">
+		                <div class="float-right m-3 footer_submit" style="display:none;">
 		                    <a href="#!" id="cancel" class="btn btn-default m-r-20">Cancel</a>
 		                    <button type="submit" class="btn btn-primary">Submit</button>
 		                </div> 
@@ -66,7 +66,7 @@
 			$('.baptismal_import').show();
 		});
 
-		var inputs = {!! json_encode($columns) !!}; 
+		var inputs = {!! json_encode($baptismal_columns) !!}; 
 		$(function () {
 		    
 		    $("#upload").bind("click", function () {
@@ -90,6 +90,7 @@
 		                            row.append(cell);
 		                        }
 		                        table.append(row);
+								$('.footer_submit').show();
 		                    }
 		                    
 		                }

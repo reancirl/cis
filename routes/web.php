@@ -65,4 +65,6 @@ Route::group(['prefix' => 'marriage', 'middleware' => 'auth'], function(){
 Route::group(['prefix' => 'import-records', 'middleware' => 'auth'], function(){
 	Route::get('/', [ImportController::class, 'index']);
 	Route::post('/baptismal', [ImportController::class, 'baptismal']);
+	Route::post('/confirmation', [ImportController::class, 'confirmation']);
+	Route::post('/first-communion', [ImportController::class, 'first_communion']);
 });

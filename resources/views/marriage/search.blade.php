@@ -143,7 +143,7 @@
 		                $.each(data, function(s, data) {
 		                    let tr = $('<tr>');
 		                    tr.append('<td>' + data['last_name'] +', '+ data['first_name'] +'&nbsp'+ data['middle_name'] +'</td>');
-		                    tr.append('<td><a href="#!" data-id="'+ data['baptismal_id'] +'" data-url="{{ url('marriage/show') }}" class="btn btn-outline-primary btn-sm p-1 btn_view_husband">&nbsp<i class="fa fa-eye"></i>&nbspView Data &nbsp </a></td>');
+		                    tr.append('<td><a href="#!" data-id="'+ data['baptismal_id'] +'" data-url="{{ url('marriage/show') }}" class="btn btn-outline-primary btn-sm p-1 btn_view_modal">&nbsp<i class="fa fa-eye"></i>&nbspView Data &nbsp </a></td>');
 		                    table.append(tr);
 		                });   
 	                } else {
@@ -185,7 +185,7 @@
 		                $.each(data, function(s, data) {
 		                    var tr = $('<tr>');
 		                    tr.append('<td>' + data['last_name'] +', '+ data['first_name'] +'&nbsp'+ data['middle_name'] +'</td>');
-		                    tr.append('<td><a href="#!" data-id="'+ data['baptismal_id'] +'" data-url="{{ url('marriage/show') }}" class="btn btn-outline-primary btn-sm p-1 btn_view_husband">&nbsp<i class="fa fa-eye"></i>&nbspView Data &nbsp </a></td>');
+		                    tr.append('<td><a href="#!" data-id="'+ data['baptismal_id'] +'" data-url="{{ url('marriage/show') }}" class="btn btn-outline-primary btn-sm p-1 btn_view_modal">&nbsp<i class="fa fa-eye"></i>&nbspView Data &nbsp </a></td>');
 		                    table.append(tr);
 		                });   
 	                } else {
@@ -197,7 +197,7 @@
 	        });
 	    });
 
-	    $('.search-result').on('click','.btn_view_husband',function(e){
+	    $('.search-result').on('click','.btn_view_modal',function(e){
             let div = $('.append-div');
             div.empty();
 

@@ -64,12 +64,22 @@ class Baptismal extends Model
                   OR concat(baptismals.first_name," ",baptismals.middle_name," ",baptismals.last_name) LIKE "%' . $name. '%")');
     }
 
-	  public function church()
+	public function church()
     {
         return $this->belongsTo('App\Church', 'church_id');
     }
 
-	  public function baptismalSponsors()
+    public function first_communion()
+    {
+        return $this->hasOne('App\FirstCommunion', 'baptismal_id','id');
+    }
+
+    public function confirmation()
+    {
+        return $this->hasOne('App\Confirmation', 'baptismal_id','id');
+    }
+
+	public function baptismalSponsors()
     {
         return $this->hasMany('App\BaptismalSponsor', 'baptismal_id','id');
     }

@@ -2,13 +2,20 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label>Attach File: </label>&nbsp
-                        <input type="file" name="file" required id="confirmationUpload">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label>Attach File: </label>&nbsp
+                                <input type="file" name="file" required id="confirmationUpload">
+                            </div>
+                            <button type="button" class="btn btn-primary" id="confirmation_attach">Attach</button>
+                        </form>
                     </div>
-                    <button type="button" class="btn btn-primary" id="confirmation_attach">Attach</button>
-                </form>
+                    <div class="col-sm-4 mt-2">
+                        <a href="csv/confirmation_import_template.csv" download><i class="fa fa-download"></i> Download Confirmation Import Template </a>
+                    </div>
+                </div>                
             </div>
         </div>
     </div>
@@ -24,7 +31,7 @@
                         <thead>
                             <tr>
                                 @foreach($confirmation_columns as $i => $col)
-                                <th>{{ $col }}</th>
+                                    <th>{{ $col }}</th>
                                 @endforeach
                             </tr>
                         </thead>

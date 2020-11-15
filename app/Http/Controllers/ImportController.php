@@ -16,7 +16,7 @@ class ImportController extends Controller
     {
         $baptismal_columns = ['first_name', 'middle_name', 'last_name', 'date_of_birth', 'gender' , 'place_of_birth', 'fathers_name', 'mothers_maiden_name', 'parents_address' , 'contact_number', 'parents_type_of_marriage', 'parents_marriage_place', 'church', 'date_of_seminar', 'date_of_baptismal' , 'facilitator_1', 'facilitator_2', 'facilitator_3'];
         $confirmation_columns = ['first_name', 'middle_name', 'last_name','church','date_of_seminar', 'date_of_confirmation' , 'facilitator_1', 'facilitator_2', 'facilitator_3'];
-        $first_communion_columns = ['first_name', 'middle_name', 'last_name','church','date_of_seminar', 'date_of_communion' , 'facilitator_1', 'facilitator_2', 'facilitator_3'];
+        $first_communion_columns = ['first_name', 'middle_name', 'last_name','church', 'date_of_communion' , 'facilitator_1', 'facilitator_2', 'facilitator_3'];
         return view('import.index',compact('baptismal_columns','confirmation_columns','first_communion_columns'));
     }
 
